@@ -2,11 +2,26 @@ services:
   app:
     build:
       context: .
-    tty: true
+      dockerfile: Dockerfile
+    # 開発サーバーのホスト側のファイル変更をコンテナに即座に反映
     volumes:
       - ./src:/app
+    
+    # Next.js 開発時の環境変数設定
     environment:
-      - WATCHPACK_POLLING=true
+      # Next.js開発サーバー (next dev) を実行する際は
+      # NODE_ENVを明示的に development に設定して上書きし、警告を解消
+      NODE_ENV: development
+      # WSL や一部の環境でファイル変更の検知を確実にするため、ポーリングを有効化
+      WATCHPACK_POLLING: true
+      # 他の環境変数があればここに追記
+    
+    # ターミナル接続を維持
+    tty: true
+
+    # サービス起動時に実行するコマンド (next devを実行)
     command: sh -c "npm run dev"
+    
+    # ポートマッピング
     ports:
       - "3000:3000"

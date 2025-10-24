@@ -3,7 +3,7 @@
 # ====================
 # 1. Builder Stage (ビルド環境)
 # ====================
-FROM node:20-alpine AS builder
+FROM node:20-slim AS builder
 
 # package.jsonが存在する src/ を作業ディレクトリにする
 WORKDIR /app/src
@@ -23,7 +23,7 @@ RUN npm run build
 # ====================
 # 2. Production Stage (実行環境)
 # ====================
-FROM node:20-alpine AS runner
+FROM node:20-slim AS runner
 
 # 1. 環境変数とポート設定
 # 警告を解消するため、ENVの記述を修正

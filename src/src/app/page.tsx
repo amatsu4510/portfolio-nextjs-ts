@@ -1,10 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-
-// --- 定数：作品・プロジェクトのカテゴリー (Homeでは使用しないが、型のために保持) ---
-const PROJECT_CATEGORIES = ['すべて', 'Webアプリ', 'サンプルコード', 'Webサイト'];
+import { getSortedPostsData, PostData } from '@/app/lib/blog/blog';
 
 // --- データ型定義 ---
 interface Project {
@@ -14,15 +12,6 @@ interface Project {
   category: string;
   techStack: string[];
   link: string; // GitHubまたはデプロイURL
-}
-
-interface Post {
-  id: number;
-  title: string;
-  summary: string;
-  date: string; // 投稿日
-  tags: string[];
-  link: string; // 外部ブログ（Qiita, Zenn等）またはNext.jsの別ページへのURL
 }
 
 // カテゴリーごとの色を定義（tailwindのクラス名）
@@ -64,49 +53,35 @@ const ALL_PROJECTS: Project[] = [
   },
 ];
 
-// --- サンプルブログ記事データ (全データ) ---
-const ALL_POSTS: Post[] = [
-  {
-    id: 101,
-    title: 'AWS CloudFrontとS3でNext.jsの静的サイトを完全サーバーレスデプロイする方法',
-    summary: 'SSGでビルドしたNext.jsアプリをS3にアップロードし、CloudFrontでCDN配信する手順を解説。',
-    date: '2025-01-15',
-    tags: ['AWS', 'Next.js', 'インフラ', 'サーバーレス'],
-    link: 'https://qiita.com/your-qiita-id/post/xxxxxxxxxxxxxxxxxxxx',
-  },
-  {
-    id: 102,
-    title: 'Docker Composeでモダンな開発環境を一発構築',
-    summary: '開発環境のポータビリティを確保するため、Docker Composeを使ってコンテナ化するメリットと具体的な設定方法を紹介。',
-    date: '2024-12-20',
-    tags: ['Docker', '開発環境', 'WSL', 'TypeScript'],
-    link: 'https://zenn.dev/your-zenn-id/articles/xxxxxxxxxxxxxxxxxxxx',
-  },
-  { // 追加のサンプルデータ
-    id: 103,
-    title: 'Tailwind CSSでのダークモード実装とベストプラクティス',
-    summary: 'Tailwindのユーティリティクラスを用いたダークモードの簡単な実装方法と、テーマ切り替えの仕組みを紹介。',
-    date: '2024-11-01',
-    tags: ['Tailwind CSS', 'UI/UX', 'フロントエンド'],
-    link: 'https://zenn.dev/your-zenn-id/articles/yyyyyyyyyyyyyyyyyyyy',
-  },
-];
-
 // --- Homeで表示する最新ハイライトデータを抽出 ---
 const LATEST_PROJECTS = ALL_PROJECTS.slice(0, 3); // 最新3件
-const LATEST_POSTS = ALL_POSTS.slice(0, 2); // 最新2件
 
-// --- スキル/学習サマリーデータ (変更なし) ---
+// --- スキル/学習サマリーデータ ---
 const LEARNING_SUMMARY = [
     { title: 'フロントエンド', skills: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', '状態管理 (Zustandなど)'] },
     { title: 'バックエンド/DB', skills: ['Node.js', 'Express.js', 'Next.js API Routes', 'Prisma', 'PostgreSQL'] },
     { title: 'インフラ/DevOps (開発環境)', skills: ['AWS (S3, CloudFront, Amplify)', 'Docker', 'Docker Compose', 'Git/GitHub', 'WSL'] },
 ];
 
-
+/* トップページ */
 export default function Home() {
-  // Homeコンポーネントではフィルターを使用しないため、ステートを削除
-  
+
+  /* ブログ記事の状態変数定義 */
+  const [latestPosts, setLatestPosts] = useState<PostData[]>([]);
+
+  // クライアントサイドで非同期にブログ記事を取得
+  useEffect(() => {
+    async function fetchPosts() {
+      try {
+        const allPostsData = await getSortedPostsData();
+        setLatestPosts(allPostsData.slice(0, 2)); // 最新2件
+      } catch (error) {
+        console.error('ブログ記事の取得に失敗:', error);
+      }
+    }
+    fetchPosts();
+  }, []);
+
   return (
     // 全体の背景とテキストカラー
     <div className="flex flex-col items-center min-h-screen bg-zinc-50 font-sans text-zinc-800 dark:bg-zinc-900 dark:text-zinc-200">
@@ -132,7 +107,7 @@ export default function Home() {
       {/* メインコンテンツコンテナ */}
       <main className="w-full max-w-4xl p-6 space-y-20 pt-16">
 
-        {/* --- ヒーローセクション（自己紹介欄） --- (変更なし) */}
+        {/* --- ヒーローセクション（自己紹介欄） ---*/}
         <section id="about" className="text-center py-16 rounded-3xl bg-white/90 shadow-2xl backdrop-blur-sm dark:bg-zinc-800/90">
           
           <h1 className="text-5xl font-extrabold mb-6 text-zinc-900 dark:text-white">
@@ -140,7 +115,6 @@ export default function Home() {
           </h1>
           
           <div className="max-w-xl mx-auto text-left space-y-3 mb-8">
-            
             <p className="text-xl font-semibold text-indigo-600 dark:text-indigo-400 mb-4">
                 基本情報
             </p>
@@ -259,51 +233,44 @@ export default function Home() {
         {/* --- ブログ記事のハイライトセクション --- */}
         <section id="blog-highlight">
           <h2 className="text-3xl font-bold mb-8 border-l-4 border-indigo-500 pl-4">
-            技術ブログ記事 (最新) 📚
+            Shota Blog (最新) 📚
           </h2>
-          {/* Topページでは最新の2件のみを表示 */}
-          <div className="space-y-6">
-            {LATEST_POSTS.map((post) => (
-              <a 
-                key={post.id}
-                href={post.link} 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block p-5 rounded-xl bg-white hover:bg-zinc-50 dark:bg-zinc-800/80 dark:hover:bg-zinc-700/80 shadow-lg transition-transform hover:scale-[1.005]"
+
+          <div className="grid gap-6 md:grid-cols-2">
+            {latestPosts.map(({ id, title, date, update }) => (
+              <Link
+                key={id}
+                href={`/blog/${id}`}
+                className="block p-6 rounded-xl bg-white hover:bg-zinc-50 dark:bg-zinc-800/80 dark:hover:bg-zinc-700/80 shadow-lg transition-transform hover:scale-[1.005]"
               >
-                <div className="flex items-center justify-between mb-2">
+                <div className="flex justify-between items-start mb-2">
                   <h3 className="text-xl font-bold text-zinc-900 dark:text-white hover:text-indigo-600 transition-colors">
-                    {post.title}
+                    {title}
                   </h3>
-                  <span className="text-sm text-zinc-500 dark:text-zinc-400 flex-shrink-0 ml-4">
-                    {post.date}
+                  <div className="text-sm text-zinc-500 dark:text-zinc-400 flex-shrink-0 ml-4 text-right">
+                  <div>投稿日: {new Date(date).toLocaleDateString()}</div>
+                  {update && update !== date && (
+                  <div>更新日: {new Date(update).toLocaleDateString()}</div>
+                  )}
+                  </div>
+                </div>
+                <div className="mt-4">
+                  <span className="inline-block text-indigo-600 dark:text-indigo-400 font-semibold hover:underline text-sm">
+                    記事を見る &rarr;
                   </span>
                 </div>
-                <p className="text-zinc-600 dark:text-zinc-300 mb-3 text-sm">
-                  {post.summary}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {post.tags.map(tag => (
-                    <span key={tag} className="text-xs px-2 py-0.5 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 font-medium">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </a>
+              </Link>
             ))}
           </div>
-          
           <div className="text-center pt-8">
             <Link 
               href="/blog" // 全ブログ記事ページへのリンク
               className="rounded-xl bg-indigo-100 dark:bg-indigo-900/50 px-6 py-3 text-lg font-semibold text-indigo-600 dark:text-indigo-300 transition-colors hover:bg-indigo-200 dark:hover:bg-indigo-900 shadow-md"
             >
-              すべての技術記事を読む (全{ALL_POSTS.length}件)
+              すべての記事を読む (全{latestPosts.length}件)
             </Link>
           </div>
         </section>
-
-        {/* -------------------------------------------------------------------------------------- */}
 
         {/* --- スキル/学習したことまとめセクション --- (変更なし) */}
         <section id="skills" className="pb-20">
