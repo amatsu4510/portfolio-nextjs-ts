@@ -45,6 +45,7 @@ COPY src/public ./src/public
 COPY src/package.json ./src/package.json
 # next.config.jsなどの設定ファイル (もし src/ の下にある場合)
 # COPY src/next.config.js ./src/
+COPY --from=builder /app/src/src ./src
 
 # 4. 起動コマンド
 # Next.jsの本番サーバーを起動し、srcディレクトリを参照させる
