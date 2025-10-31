@@ -1,6 +1,7 @@
 import { getPostData, getSortedPostsData, PostData } from '@/app/lib/blog/blog';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
+import './MarkdownViewer.css'
 import remarkGfm from 'remark-gfm';
 
 const formatDate = (date: string | Date) => {
@@ -9,18 +10,18 @@ const formatDate = (date: string | Date) => {
 };
 
 export default async function Post({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params; 
+  const { id } = await params;
   const postData = await getPostData(id);
 
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 py-16 px-4">
-      <main className="max-w-3xl mx-auto space-y-8">
+      <main className="max-w-5xl mx-auto space-y-8">
 
         {/* 記事タイトル */}
-        <h1 className="text-4xl font-extrabold text-zinc-900 dark:text-white">{postData.title}</h1>
+        <h1 className="text-5xl font-extrabold text-zinc-900 dark:text-white text-center">{postData.title}</h1>
 
         {/* 投稿日・更新日 */}
-        <div className="flex justify-end space-x-6 text-sm text-gray-500 dark:text-gray-400">
+        <div className="flex justify-center space-x-6 text-lg text-gray-500 dark:text-gray-400">
           <div>投稿日: {formatDate(postData.date)}</div>
           {postData.update && postData.update !== postData.date && (
             <div>更新日: {formatDate(postData.update)}</div>
@@ -28,7 +29,9 @@ export default async function Post({ params }: { params: Promise<{ id: string }>
         </div>
 
         {/* 記事本文 (Markdown → HTML) */}
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>{postData.content!}</ReactMarkdown>
+        <div className='markdown-body'>
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>{postData.content!}</ReactMarkdown>
+        </div>
 
         {/* ページ下部リンク */}
         <div className="flex justify-between mt-10 text-sm text-zinc-500 dark:text-zinc-400">
