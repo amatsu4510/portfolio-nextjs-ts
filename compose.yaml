@@ -4,6 +4,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_BLOG_S3_BASE_URL: https://portfolio-nextjs-ts.s3.ap-northeast-1.amazonaws.com/
     # 開発環境のホスト側(ローカル)のファイル変更をコンテナに即座に反映
     volumes:
       # ローカルのsrcディレクトリをコンテナの/app/srcにマウント

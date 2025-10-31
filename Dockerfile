@@ -5,6 +5,13 @@
 # ====================
 FROM node:20-slim AS builder
 
+# Docker Composeから渡されるビルド引数を受け取る
+ARG NEXT_PUBLIC_BLOG_S3_BASE_URL
+
+# 受け取ったビルド引数を、このステージの環境変数として設定
+# これにより `npm run build` がこの値を認識できるようになる
+ENV NEXT_PUBLIC_BLOG_S3_BASE_URL=$NEXT_PUBLIC_BLOG_S3_BASE_URL
+
 # package.jsonが存在する src/ を作業ディレクトリにする
 WORKDIR /app/src
 
@@ -29,6 +36,10 @@ FROM node:20-slim AS runner
 ENV NODE_ENV=production
 ENV PORT=3000
 EXPOSE 3000
+# 実行時に利用する環境変数を受け取るためのARGとENV（重要）
+# docker-compose.yamlのenvironmentセクションからこの値が渡される
+ARG NEXT_PUBLIC_BLOG_S3_BASE_URL
+ENV NEXT_PUBLIC_BLOG_S3_BASE_URL=$NEXT_PUBLIC_BLOG_S3_BASE_URL
 
 # 作業ディレクトリを /app に設定
 WORKDIR /app/src
