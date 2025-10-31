@@ -43,14 +43,6 @@ const ALL_PROJECTS: Project[] = [
     techStack: ['Next.js', 'AWS S3', 'AWS CloudFront', 'GitHub Actions'],
     link: '#',
   },
-  {
-    id: 3,
-    title: 'フルスタック認証システムサンプル',
-    description: 'Next.jsのAPIルートとNextAuth.jsを使用し、データベース連携（例：Prisma + PostgreSQL）によるユーザー認証機能を実装。',
-    category: 'Webアプリ',
-    techStack: ['Next.js', 'NextAuth', 'Prisma', 'PostgreSQL'],
-    link: '#',
-  },
 ];
 
 // --- Homeで表示する最新ハイライトデータを抽出 ---
@@ -85,7 +77,7 @@ export default function Home() {
   return (
     // 全体の背景とテキストカラー
     <div className="flex flex-col items-center min-h-screen bg-zinc-50 font-sans text-zinc-800 dark:bg-zinc-900 dark:text-zinc-200">
-      
+
       {/* 1. ナビゲーションバー (ヘッダー) - stickyで固定 */}
       <header className="sticky top-0 z-10 w-full bg-white/90 backdrop-blur-sm dark:bg-zinc-900/90 shadow-md">
         <nav className="w-full max-w-4xl mx-auto flex justify-between items-center py-4 px-6">
@@ -105,16 +97,16 @@ export default function Home() {
       </header>
 
       {/* メインコンテンツコンテナ */}
-      <main className="w-full max-w-4xl p-6 space-y-20 pt-16">
+      <main className="w-full max-w-5xl p-6 space-y-20 pt-16">
 
         {/* --- ヒーローセクション（自己紹介欄） ---*/}
-        <section id="about" className="text-center py-16 rounded-3xl bg-white/90 shadow-2xl backdrop-blur-sm dark:bg-zinc-800/90">
-          
+        <section id="about" className="text-center py-20 px-20 rounded-3xl bg-white/90 shadow-2xl backdrop-blur-sm dark:bg-zinc-800/90 ">
+
           <h1 className="text-5xl font-extrabold mb-6 text-zinc-900 dark:text-white">
             学習ポートフォリオ
           </h1>
-          
-          <div className="max-w-xl mx-auto text-left space-y-3 mb-8">
+
+          <div className="max-w-4xl mx-auto text-left space-y-3 mb-8">
             <p className="text-xl font-semibold text-indigo-600 dark:text-indigo-400 mb-4">
                 基本情報
             </p>
@@ -129,7 +121,7 @@ export default function Home() {
               </li>
               <li className="flex items-start">
                 <span className="text-indigo-500 mr-2 font-bold w-20 flex-shrink-0">経歴:</span>
-                短大卒業後、組み込みシステム開発5年。現在も組み込み系エンジニアとして勤務しつつ、Web開発を独学中。
+                短大卒業後、組み込みシステム開発5年。<br />現在も組み込み系エンジニアとして勤務しつつ、Web開発を独学中。
               </li>
             </ul>
 
@@ -155,12 +147,12 @@ export default function Home() {
               </li>
             </ul>
           </div>
-          
+
           <div className="mt-8 space-x-4">
              {/* 連絡先/GitHubへのボタン */}
-            <Link 
-              href="https://github.com/amatsu4510" 
-              target="_blank" 
+            <Link
+              href="https://github.com/amatsu4510"
+              target="_blank"
               rel="noopener noreferrer"
               className="rounded-xl bg-indigo-600 px-6 py-3 text-lg font-semibold text-white transition-transform hover:scale-[1.02] shadow-lg"
             >
@@ -187,17 +179,17 @@ export default function Home() {
                     <h3 className="text-lg font-bold text-indigo-600 dark:text-indigo-400">
                       {project.title}
                     </h3>
-                    <span 
+                    <span
                       className={`text-xs font-bold px-2 py-0.5 rounded-full ${getCategoryColor(project.category)}`}
                     >
                       {project.category}
                     </span>
                   </div>
-                  
+
                   <p className="text-zinc-600 dark:text-zinc-300 mb-4 text-sm line-clamp-3 h-16">
                     {project.description}
                   </p>
-                  
+
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.techStack.slice(0, 3).map(tech => ( // 3つに制限
                       <span key={tech} className="text-xs px-2 py-0.5 rounded-md bg-zinc-200 dark:bg-zinc-600 text-zinc-700 dark:text-zinc-300 font-medium">
@@ -206,8 +198,8 @@ export default function Home() {
                     ))}
                   </div>
 
-                  <Link 
-                    href={project.link} 
+                  <Link
+                    href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center text-indigo-600 dark:text-indigo-400 font-semibold hover:underline text-sm"
@@ -217,9 +209,9 @@ export default function Home() {
                 </div>
             ))}
           </div>
-          
+
           <div className="text-center pt-8">
-            <Link 
+            <Link
               href="/projects" // 全プロジェクトページへのリンク
               className="rounded-xl bg-indigo-100 dark:bg-indigo-900/50 px-6 py-3 text-lg font-semibold text-indigo-600 dark:text-indigo-300 transition-colors hover:bg-indigo-200 dark:hover:bg-indigo-900 shadow-md"
             >
@@ -229,7 +221,7 @@ export default function Home() {
         </section>
 
         {/* -------------------------------------------------------------------------------------- */}
-        
+
         {/* --- ブログ記事のハイライトセクション --- */}
         <section id="blog-highlight">
           <h2 className="text-3xl font-bold mb-8 border-l-4 border-indigo-500 pl-4">
@@ -263,7 +255,7 @@ export default function Home() {
             ))}
           </div>
           <div className="text-center pt-8">
-            <Link 
+            <Link
               href="/blog" // 全ブログ記事ページへのリンク
               className="rounded-xl bg-indigo-100 dark:bg-indigo-900/50 px-6 py-3 text-lg font-semibold text-indigo-600 dark:text-indigo-300 transition-colors hover:bg-indigo-200 dark:hover:bg-indigo-900 shadow-md"
             >
@@ -280,7 +272,7 @@ export default function Home() {
 
           <div className="grid gap-6 md:grid-cols-3">
             {LEARNING_SUMMARY.map((group) => (
-              <div 
+              <div
                 key={group.title}
                 className="rounded-xl p-6 bg-white dark:bg-zinc-800/80 shadow-md border-t-4 border-indigo-500"
               >
