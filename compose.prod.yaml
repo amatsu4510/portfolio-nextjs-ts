@@ -1,0 +1,25 @@
+services:
+  app:
+    # 開発用と共通のビルド設定を使用
+    build:
+      context: .
+      dockerfile: Dockerfile
+    
+    # 環境変数設定
+    environment:
+      # 本番サーバー (next start) を実行
+      NODE_ENV: production
+      # コンテナ内部のポート (Dockerfileで設定済み)
+      PORT: 3000
+
+    # サービス起動時に実行するコマンド
+    # 修正: npmに対してsrcフォルダをプロジェクトのルートとして扱うよう指示し、本番起動コマンド (start) を実行
+    command: npm start --prefix src
+    
+    # ポートマッピング
+    # 外部の80番ポートをコンテナ内部の3000番ポートにマッピング
+    ports:
+      - "80:3000"
+      
+    # 常に再起動する設定 (コンテナが落ちても自動復旧)
+    restart: always
