@@ -77,25 +77,6 @@ export default function Home() {
   return (
     // 全体の背景とテキストカラー
     <div className="flex flex-col items-center min-h-screen bg-zinc-50 font-sans text-zinc-800 dark:bg-zinc-900 dark:text-zinc-200">
-
-      {/* 1. ナビゲーションバー (ヘッダー) - stickyで固定 */}
-      <header className="sticky top-0 z-10 w-full bg-white/90 backdrop-blur-sm dark:bg-zinc-900/90 shadow-md">
-        <nav className="w-full max-w-4xl mx-auto flex justify-between items-center py-4 px-6">
-          <span className="text-xl font-bold text-indigo-600 dark:text-indigo-400">
-            千葉翔太 | Portfolio
-          </span>
-          <div className="space-x-6 text-sm font-medium">
-            <a href="#about" className="hover:text-indigo-600 transition-colors">自己紹介</a>
-            {/* 変更: 別ページへのリンクに変更 */}
-            <Link href="/projects" className="hover:text-indigo-600 transition-colors">Webアプリ・作品</Link>
-            {/* 変更: 別ページへのリンクに変更 */}
-            <Link href="/blog" className="hover:text-indigo-600 transition-colors">技術ブログ</Link>
-            <a href="#skills" className="hover:text-indigo-600 transition-colors">開発環境・学習</a>
-            <Link href="/contact" className="hover:text-indigo-600 transition-colors">Contact</Link>
-          </div>
-        </nav>
-      </header>
-
       {/* メインコンテンツコンテナ */}
       <main className="w-full max-w-5xl p-6 space-y-20 pt-16">
 
@@ -291,13 +272,7 @@ export default function Home() {
             ))}
           </div>
         </section>
-
       </main>
-
-      {/* フッター */}
-      <footer className="w-full max-w-4xl py-6 border-t border-zinc-200 dark:border-zinc-700 text-center text-sm text-zinc-500 dark:text-zinc-400 mt-10">
-        &copy; {new Date().getFullYear()} 千葉翔太 Portfolio. Built with Next.js & Tailwind CSS.
-      </footer>
     </div>
   );
 }
