@@ -17,7 +17,7 @@ export type PostData = {
 // 🚨 パスの修正: Dockerコンテナ内でのファイルシステム解決
 // ユーザー提供の情報に基づき、ディレクトリ構造が 'src/src' となっているため、
 // 二重の 'src' を含めるように修正しました。
-const postsDirectory = '/app/src/app/contents/blog';
+const postsDirectory = '/app/src/src/app/contents/blog';
 // ----------------------------------------------------------------------
 
 

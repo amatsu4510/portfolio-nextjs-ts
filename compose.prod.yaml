@@ -1,6 +1,6 @@
 services:
   app:
-    # 開発用と共通のビルド設定を使用
+    # ビルド設定(Dcokerfileを使用)
     build:
       context: .
       dockerfile: Dockerfile
@@ -12,8 +12,7 @@ services:
       # コンテナ内部のポート (Dockerfileで設定済み)
       PORT: 3000
 
-    # サービス起動時に実行するコマンド
-    # 修正: npmに対してsrcフォルダをプロジェクトのルートとして扱うよう指示し、本番起動コマンド (start) を実行
+    # サービス起動時に実行するコマンド (本番サーバー起動)
     command: npm start --prefix src
     
     # ポートマッピング

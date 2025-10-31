@@ -8,16 +8,16 @@ FROM node:20-slim AS builder
 # package.jsonが存在する src/ を作業ディレクトリにする
 WORKDIR /app/src
 
-# 1. 依存ファイルのみをコピー（キャッシュ最適化のため）
+# package.json と package-lock.json をローカルからコピー
 COPY src/package.json src/package-lock.json ./
 
 # 依存関係をインストール
 RUN npm install
 
-# 2. アプリケーションコードをコピー
+# ローカルのsrc/ディレクトリの内容をコンテナの作業ディレクトリにコピー
 COPY src/ .
 
-# 3. Next.jsの本番ビルドを実行
+# Next.js アプリケーションをビルド
 RUN npm run build
 
 # ====================
@@ -25,14 +25,13 @@ RUN npm run build
 # ====================
 FROM node:20-slim AS runner
 
-# 1. 環境変数とポート設定
-# 警告を解消するため、ENVの記述を修正
+# 環境変数の設定 (本番環境用)
 ENV NODE_ENV=production
 ENV PORT=3000
 EXPOSE 3000
 
-# 2. 実行用作業ディレクトリを /app に設定
-WORKDIR /app
+# 作業ディレクトリを /app に設定
+WORKDIR /app/src
 
 # 3. Builderステージから必要なファイルのみをコピー
 # 依存関係 (node_modules)

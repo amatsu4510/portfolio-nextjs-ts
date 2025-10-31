@@ -1,25 +1,26 @@
 services:
   app:
+    # ビルド設定(Dcokerfileを使用)
     build:
       context: .
       dockerfile: Dockerfile
-    # 開発サーバーのホスト側のファイル変更をコンテナに即座に反映
+    # 開発環境のホスト側(ローカル)のファイル変更をコンテナに即座に反映
     volumes:
-      - ./src:/app
+      # ローカルのsrcディレクトリをコンテナの/app/srcにマウント
+      - ./src:/app/src
     
     # Next.js 開発時の環境変数設定
     environment:
-      # Next.js開発サーバー (next dev) を実行する際は
-      # NODE_ENVを明示的に development に設定して上書きし、警告を解消
+      # 開発環境 (next dev) を実行
       NODE_ENV: development
-      # WSL や一部の環境でファイル変更の検知を確実にするため、ポーリングを有効化
+      # ホットリロード用の監視設定
       WATCHPACK_POLLING: true
       # 他の環境変数があればここに追記
     
-    # ターミナル接続を維持
+    # ターミナルを有効化（対話型モード）
     tty: true
 
-    # サービス起動時に実行するコマンド (next devを実行)
+    # サービス起動時に実行するコマンド(開発サーバー起動)
     command: sh -c "npm run dev"
     
     # ポートマッピング
