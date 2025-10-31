@@ -6,9 +6,10 @@ docker compose down
 # Clean up unused Docker resources
 docker system prune -a
 
+# Determine mode based on the first argument
 if [ "$1" = "P" ]; then
     docker compose -f compose.prod.yaml up --build -d
-elif [ "$MODE" == "D" ]; then
+elif [ "$1" = "D" ]; then
     docker compose -f compose.yaml up --build -d
 else
     echo "Usage: ./dockerstart.sh [P|D]"
