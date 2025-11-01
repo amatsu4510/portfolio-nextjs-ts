@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, ReactNode, FC } from 'react';
+import React, { useEffect, useState, ReactNode, FC } from 'react';
+import { usePathname } from 'next/navigation';
 
 // LinkコンポーネントのPropsの型を定義
 interface LinkProps {
@@ -22,8 +23,21 @@ const Link: FC<LinkProps> = ({ href, children, ...props }) => <a href={href} {..
 const MobileHeader: FC = () => {
   // モバイルメニューの状態を boolean 型で定義
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  
+  // 現在のパスを取得
+  const pathname = usePathname(); 
+
+  // ページ遷移時にメニューを閉じる処理 ---
+  useEffect(() => {
+    // pathname (現在のURLパス) が変更された場合、isMenuOpenをfalseにリセットする
+    if (isMenuOpen) {
+        setIsMenuOpen(false);
+    }
+  }, [pathname]); // 依存配列にpathnameを設定
 
   // メニュークリック時のハンドラ (メニューを閉じる処理を追加)
+  // usePathnameの処理により、このハンドラは実際には冗長になる可能性がありますが、
+  // ユーザーが同じページ内のアンカーリンク（例: /#section1）をクリックした場合に備えて残します。
   const handleLinkClick = (): void => {
     if (isMenuOpen) {
       setIsMenuOpen(false);
