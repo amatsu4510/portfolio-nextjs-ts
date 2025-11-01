@@ -60,12 +60,17 @@ export default function Home() {
 
   /* ブログ記事の状態変数定義 */
   const [latestPosts, setLatestPosts] = useState<PostData[]>([]);
+  const [totalPostsCount, setTotalPostsCount] = useState<number>(0);
 
   // クライアントサイドで非同期にブログ記事を取得
   useEffect(() => {
     async function fetchPosts() {
       try {
         const allPostsData = await getSortedPostsData();
+
+        // 総記事数を設定
+        setTotalPostsCount(allPostsData.length);
+
         setLatestPosts(allPostsData.slice(0, 2)); // 最新2件
       } catch (error) {
         console.error('ブログ記事の取得に失敗:', error);
@@ -77,39 +82,43 @@ export default function Home() {
   return (
     // 全体の背景とテキストカラー
     <div className="flex flex-col items-center min-h-screen bg-zinc-50 font-sans text-zinc-800 dark:bg-zinc-900 dark:text-zinc-200">
-      {/* メインコンテンツコンテナ */}
-      <main className="w-full max-w-5xl p-6 space-y-20 pt-16">
+      {/* メインコンテンツコンテナ: モバイルで左右にパディングを確保し、タブレット以上で中央揃え */}
+      <main className="w-full max-w-5xl p-4 sm:p-6 space-y-16 sm:space-y-20 pt-10 sm:pt-16">
 
         {/* --- ヒーローセクション（自己紹介欄） ---*/}
-        <section id="about" className="text-center py-20 px-20 rounded-3xl bg-white/90 shadow-2xl backdrop-blur-sm dark:bg-zinc-800/90 ">
+        {/* モバイルでパディングを削減し、角を丸くする */}
+        <section id="about" className="text-center p-6 sm:p-10 md:p-16 lg:p-20 rounded-3xl bg-white/90 shadow-2xl backdrop-blur-sm dark:bg-zinc-800/90 ">
 
-          <h1 className="text-5xl font-extrabold mb-6 text-zinc-900 dark:text-white">
+          {/* H1: モバイルで小さく、デスクトップで大きく */}
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-6 text-zinc-900 dark:text-white">
             学習ポートフォリオ
           </h1>
 
-          <div className="max-w-4xl mx-auto text-left space-y-3 mb-8">
-            <p className="text-xl font-semibold text-indigo-600 dark:text-indigo-400 mb-4">
-                基本情報
+          <div className="max-w-4xl mx-auto text-left space-y-6 sm:space-y-8 mb-8">
+            <p className="text-lg sm:text-xl font-semibold text-indigo-600 dark:text-indigo-400 mb-4">
+              基本情報
             </p>
-            <ul className="space-y-2 text-lg text-zinc-700 dark:text-zinc-300 mb-6 border-b border-zinc-200 dark:border-zinc-700 pb-4">
-              <li className="flex items-start">
-                <span className="text-indigo-500 mr-2 font-bold w-20 flex-shrink-0">名前:</span>
+            {/* UL: 垂直方向のスペースを確保 */}
+            <ul className="space-y-3 sm:space-y-2 text-base sm:text-lg text-zinc-700 dark:text-zinc-300 mb-6 border-b border-zinc-200 dark:border-zinc-700 pb-4">
+              {/* LI: モバイルでの固定幅を解除し、sm以上でW-20を適用 */}
+              <li className="flex flex-col sm:flex-row items-start sm:items-center">
+                <span className="text-indigo-500 mr-2 font-bold w-auto sm:w-20 sm:flex-shrink-0">名前:</span>
                 千葉 翔太
               </li>
-              <li className="flex items-start">
-                <span className="text-indigo-500 mr-2 font-bold w-20 flex-shrink-0">生年月日:</span>
+              <li className="flex flex-col sm:flex-row items-start sm:items-center">
+                <span className="text-indigo-500 mr-2 font-bold w-auto sm:w-20 sm:flex-shrink-0">生年月日:</span>
                 2000年7月2日
               </li>
-              <li className="flex items-start">
-                <span className="text-indigo-500 mr-2 font-bold w-20 flex-shrink-0">経歴:</span>
+              <li className="flex flex-col sm:flex-row items-start">
+                <span className="text-indigo-500 mr-2 font-bold w-auto sm:w-20 sm:flex-shrink-0">経歴:</span>
                 短大卒業後、組み込みシステム開発5年。<br />現在も組み込み系エンジニアとして勤務しつつ、Web開発を独学中。
               </li>
             </ul>
 
-            <p className="text-xl font-semibold text-indigo-600 dark:text-indigo-400 mb-4">
-                主な学習内容
+            <p className="text-lg sm:text-xl font-semibold text-indigo-600 dark:text-indigo-400 mb-4">
+              主な学習内容
             </p>
-            <ul className="space-y-2 text-lg text-zinc-700 dark:text-zinc-300">
+            <ul className="space-y-2 text-base sm:text-lg text-zinc-700 dark:text-zinc-300">
               <li className="flex items-start">
                 <span className="text-indigo-500 mr-2 text-xl">&bull;</span>
                 フロントエンド: Next.js, React, TypeScript, Tailwind CSS を用いたモダンなUI/UX設計と実装。
@@ -129,15 +138,15 @@ export default function Home() {
             </ul>
           </div>
 
-          <div className="mt-8 space-x-4">
-             {/* 連絡先/GitHubへのボタン */}
+          <div className="mt-8">
+            {/* 連絡先/GitHubへのボタン: モバイルで適切なパディングとテキストサイズ */}
             <Link
               href="https://github.com/amatsu4510"
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-xl bg-indigo-600 px-6 py-3 text-lg font-semibold text-white transition-transform hover:scale-[1.02] shadow-lg"
+              className="rounded-xl bg-indigo-600 px-5 py-3 text-base sm:text-lg font-semibold text-white transition-transform hover:scale-[1.02] shadow-lg"
             >
-              GitHubを見る (コードはこちら)
+              GitHub
             </Link>
           </div>
         </section>
@@ -146,15 +155,15 @@ export default function Home() {
 
         {/* --- プロジェクト/作品のハイライトセクション --- */}
         <section id="projects-highlight">
-          <h2 className="text-3xl font-bold mb-8 border-l-4 border-indigo-500 pl-4">
-            Webアプリ・作品 (最新) 💻
+          <h2 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 border-l-4 border-indigo-500 pl-4">
+            プロジェクト (最新) 💻
           </h2>
           {/* Topページでは最新の3件のみを表示 */}
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-6 grid-cols-1 md:grid-cols-3">
             {LATEST_PROJECTS.map((project) => (
                 <div
                   key={project.id}
-                  className="rounded-xl p-6 bg-white hover:bg-zinc-50 dark:bg-zinc-800/80 dark:hover:bg-zinc-700/80 shadow-lg"
+                  className="rounded-xl p-5 sm:p-6 bg-white hover:bg-zinc-50 dark:bg-zinc-800/80 dark:hover:bg-zinc-700/80 shadow-lg transition-shadow hover:shadow-xl"
                 >
                   <div className="flex justify-between items-start mb-3 h-12">
                     <h3 className="text-lg font-bold text-indigo-600 dark:text-indigo-400">
@@ -194,9 +203,9 @@ export default function Home() {
           <div className="text-center pt-8">
             <Link
               href="/projects" // 全プロジェクトページへのリンク
-              className="rounded-xl bg-indigo-100 dark:bg-indigo-900/50 px-6 py-3 text-lg font-semibold text-indigo-600 dark:text-indigo-300 transition-colors hover:bg-indigo-200 dark:hover:bg-indigo-900 shadow-md"
+              className="rounded-xl bg-indigo-100 dark:bg-indigo-900/50 px-6 py-3 text-base sm:text-lg font-semibold text-indigo-600 dark:text-indigo-300 transition-colors hover:bg-indigo-200 dark:hover:bg-indigo-900 shadow-md"
             >
-              すべての作品・プロジェクトを見る (全{ALL_PROJECTS.length}件)
+              すべてのプロジェクト見る (全{ALL_PROJECTS.length}件)
             </Link>
           </div>
         </section>
@@ -205,22 +214,22 @@ export default function Home() {
 
         {/* --- ブログ記事のハイライトセクション --- */}
         <section id="blog-highlight">
-          <h2 className="text-3xl font-bold mb-8 border-l-4 border-indigo-500 pl-4">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 border-l-4 border-indigo-500 pl-4">
             Shota Blog (最新) 📚
           </h2>
 
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-6 grid-cols-1 md:grid-cols-2">
             {latestPosts.map(({ id, title, date, update }) => (
               <Link
                 key={id}
                 href={`/blog/${id}`}
-                className="block p-6 rounded-xl bg-white hover:bg-zinc-50 dark:bg-zinc-800/80 dark:hover:bg-zinc-700/80 shadow-lg transition-transform hover:scale-[1.005]"
+                className="block p-5 sm:p-6 rounded-xl bg-white hover:bg-zinc-50 dark:bg-zinc-800/80 dark:hover:bg-zinc-700/80 shadow-lg transition-transform hover:scale-[1.005]"
               >
-                <div className="flex justify-between items-start mb-2">
-                  <h3 className="text-xl font-bold text-zinc-900 dark:text-white hover:text-indigo-600 transition-colors">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2">
+                  <h3 className="text-lg sm:text-xl font-bold text-zinc-900 dark:text-white hover:text-indigo-600 transition-colors mb-2 sm:mb-0">
                     {title}
                   </h3>
-                  <div className="text-sm text-zinc-500 dark:text-zinc-400 flex-shrink-0 ml-4 text-right">
+                  <div className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 flex-shrink-0 ml-0 sm:ml-4 text-left sm:text-right">
                   <div>投稿日: {new Date(date).toLocaleDateString()}</div>
                   {update && update !== date && (
                   <div>更新日: {new Date(update).toLocaleDateString()}</div>
@@ -238,31 +247,31 @@ export default function Home() {
           <div className="text-center pt-8">
             <Link
               href="/blog" // 全ブログ記事ページへのリンク
-              className="rounded-xl bg-indigo-100 dark:bg-indigo-900/50 px-6 py-3 text-lg font-semibold text-indigo-600 dark:text-indigo-300 transition-colors hover:bg-indigo-200 dark:hover:bg-indigo-900 shadow-md"
+              className="rounded-xl bg-indigo-100 dark:bg-indigo-900/50 px-6 py-3 text-base sm:text-lg font-semibold text-indigo-600 dark:text-indigo-300 transition-colors hover:bg-indigo-200 dark:hover:bg-indigo-900 shadow-md"
             >
-              すべての記事を読む (全{latestPosts.length}件)
+              すべての記事を読む (全{totalPostsCount}件)
             </Link>
           </div>
         </section>
 
         {/* --- スキル/学習したことまとめセクション --- (変更なし) */}
-        <section id="skills" className="pb-20">
-          <h2 className="text-3xl font-bold mb-8 border-l-4 border-indigo-500 pl-4">
+        <section id="skills" className="pb-16 sm:pb-20">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 border-l-4 border-indigo-500 pl-4">
             開発環境と習得スキル ✨
           </h2>
-
-          <div className="grid gap-6 md:grid-cols-3">
+          {/* Grid: モバイルでは1カラム (grid-cols-1)、md以上で3カラム */}
+          <div className="grid gap-6 grid-cols-1 md:grid-cols-3">
             {LEARNING_SUMMARY.map((group) => (
               <div
                 key={group.title}
-                className="rounded-xl p-6 bg-white dark:bg-zinc-800/80 shadow-md border-t-4 border-indigo-500"
+                className="rounded-xl p-5 sm:p-6 bg-white dark:bg-zinc-800/80 shadow-md border-t-4 border-indigo-500"
               >
                 <h3 className="text-xl font-bold mb-4 text-zinc-900 dark:text-white">
                   {group.title}
                 </h3>
                 <ul className="space-y-2">
                   {group.skills.map(skill => (
-                    <li key={skill} className="flex items-center text-zinc-700 dark:text-zinc-300">
+                    <li key={skill} className="flex items-center text-zinc-700 dark:text-zinc-300 text-base">
                       <svg className="w-4 h-4 mr-2 text-indigo-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
                       {skill}
                     </li>

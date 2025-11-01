@@ -18,13 +18,13 @@ export default async function Post({ params }: { params: Promise<{ id: string }>
       <main className="max-w-5xl mx-auto space-y-8">
 
         {/* 記事タイトル */}
-        <h1 className="text-5xl font-extrabold text-zinc-900 dark:text-white text-center">{postData.title}</h1>
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-zinc-900 dark:text-white text-center leading-tight">{postData.title}</h1>
 
         {/* 投稿日・更新日 */}
-        <div className="flex justify-center space-x-6 text-lg text-gray-500 dark:text-gray-400">
-          <div>投稿日: {formatDate(postData.date)}</div>
+        <div className="flex flex-col sm:flex-row justify-center sm:space-x-6 space-y-1 sm:space-y-0 text-sm sm:text-lg text-zinc-500 dark:text-zinc-400 border-b border-t border-zinc-200 dark:border-zinc-700 py-3">
+          <div className="text-center">投稿日: {formatDate(postData.date)}</div>
           {postData.update && postData.update !== postData.date && (
-            <div>更新日: {formatDate(postData.update)}</div>
+            <div className="text-center">更新日: {formatDate(postData.update)}</div>
           )}
         </div>
 
@@ -34,11 +34,11 @@ export default async function Post({ params }: { params: Promise<{ id: string }>
         </div>
 
         {/* ページ下部リンク */}
-        <div className="flex justify-between mt-10 text-sm text-zinc-500 dark:text-zinc-400">
-          <Link href="/blog" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+        <div className="flex flex-col sm:flex-row justify-between pt-8 border-t border-zinc-200 dark:border-zinc-700 mt-10 text-sm text-zinc-500 dark:text-zinc-400 space-y-4 sm:space-y-0">
+          <Link href="/blog" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors text-center sm:text-left p-2 rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-800">
             &larr; ブログ一覧に戻る
           </Link>
-          <Link href="/" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+          <Link href="/" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors text-center sm:text-right p-2 rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-800">
             トップページに戻る &rarr;
           </Link>
         </div>
