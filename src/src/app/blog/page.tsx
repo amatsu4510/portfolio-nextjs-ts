@@ -12,20 +12,20 @@ export default async function BlogPage() {
     };
 
     return (
-        <div className="min-h-screen bg-zinc-50 font-sans text-zinc-800 dark:bg-zinc-900 dark:text-zinc-200 py-16">
-            <main className="w-full max-w-3xl mx-auto p-6 space-y-10">
+        <div className="min-h-screen bg-white font-sans text-zinc-800 dark:bg-zinc-900 dark:text-zinc-100 py-8 sm:py-12">
+            <main className="w-full max-w-5xl mx-auto px-4 sm:px-6 space-y-12">
                 <div className="space-y-6">
-                    <div className="container mx-auto p-4">
-                        <h1 className="text-5xl font-extrabold mb-8 text-center">
+                    <div className="text-center space-y-2">
+                        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-600">
                             Shota Blog
                         </h1>
                         
-                        <section className="mt-8">
-                            <h2 className="text-4xl font-extrabold mb-10 border-l-4 border-indigo-500 pl-4">
+                        <section className="space-y-8">
+                            <h2 className="text-3xl sm:text-4xl font-bold text-zinc-700 dark:text-zinc-200">
                                 Blog一覧 📚
                             </h2>
                             
-                            <ul className="space-y-6">
+                            <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                                 {allPostsData.map(({ id, date, update, title }) => (
                                     <li 
                                         key={id} 
@@ -54,12 +54,12 @@ export default async function BlogPage() {
                 </div>
                 
                 {/* 外部ブログへの誘導リンク */}
-                <div className="text-center pt-8">
+                <div className="text-center pt-8 border-t border-zinc-200 dark:border-zinc-700/70 space-y-4">
                     <Link 
                         href="https://qiita.com/amatsu4510"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-block text-lg font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-200 transition-colors"
+                        className="inline-flex items-center text-base sm:text-lg font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 transition-colors group"
                     >
                         外部ブログ（Qiita/Zenn）を見る &rarr;
                     </Link>
@@ -68,7 +68,7 @@ export default async function BlogPage() {
                 <div className="text-center pt-4">
                     <Link 
                         href="/"
-                        className="inline-block text-lg font-semibold text-zinc-500 dark:text-zinc-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                        className="inline-block text-base sm:text-lg font-medium text-zinc-500 dark:text-zinc-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors mt-2"
                     >
                         &larr; トップページに戻る
                     </Link>
