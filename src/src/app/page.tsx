@@ -125,7 +125,7 @@ export default function Home() {
               </li>
               <li className="flex items-start">
                 <span className="text-indigo-500 mr-2 text-xl">&bull;</span>
-                インフラ・デプロイ: AWS (S3, CloudFront)** を中心としたサーバーレス構成でのデプロイ経験。
+                インフラ・デプロイ: AWS (S3, CloudFront) を中心としたサーバーレス構成でのデプロイ経験。
               </li>
               <li className="flex items-start">
                 <span className="text-indigo-500 mr-2 text-xl">&bull;</span>
@@ -190,7 +190,6 @@ export default function Home() {
 
                   <Link
                     href={project.link}
-                    target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center text-indigo-600 dark:text-indigo-400 font-semibold hover:underline text-sm"
                   >
