@@ -19,32 +19,32 @@ export default async function BlogPage() {
                         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-600">
                             Shota Blog
                         </h1>
-                        
+
                         <section className="space-y-8">
                             <h2 className="text-3xl sm:text-4xl font-bold text-zinc-700 dark:text-zinc-200">
                                 Blog一覧 📚
                             </h2>
-                            
+
                             <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                                 {allPostsData.map(({ id, date, update, title }) => (
-                                    <li 
-                                        key={id} 
+                                    <li
+                                        key={id}
                                         className="p-4 border rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 bg-white dark:bg-zinc-800"
                                     >
                                         {/* 個別記事へのリンク */}
-                                        <Link 
-                                            href={`/blog/${id}`} 
+                                        <Link
+                                            href={`/blog/${id}`}
                                             className="block text-2xl font-semibold text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
                                         >
                                             {title}
                                         </Link>
-                                        
+
                                         {/* 投稿日と更新日 */}
                                         <small className="text-gray-500 dark:text-gray-400 mt-1 block">
-                                          投稿日: {formatDate(date)}
-                                          {update && update !== date && (
+                                        投稿日: {formatDate(date)}
+                                        {update && update !== date && (
                                             <span className="ml-4">更新日: {formatDate(update)}</span>
-                                          )}
+)}
                                         </small>
                                     </li>
                                 ))}
@@ -52,10 +52,10 @@ export default async function BlogPage() {
                         </section>
                     </div>
                 </div>
-                
+
                 {/* 外部ブログへの誘導リンク */}
                 <div className="text-center pt-8 border-t border-zinc-200 dark:border-zinc-700/70 space-y-4">
-                    <Link 
+                    <Link
                         href="https://qiita.com/amatsu4510"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -66,7 +66,7 @@ export default async function BlogPage() {
                 </div>
 
                 <div className="text-center pt-4">
-                    <Link 
+                    <Link
                         href="/"
                         className="inline-block text-base sm:text-lg font-medium text-zinc-500 dark:text-zinc-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors mt-2"
                     >

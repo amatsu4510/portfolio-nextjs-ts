@@ -29,11 +29,11 @@ const getCategoryColor = (category: string) => categoryColors[category] || 'text
 const ALL_PROJECTS: Project[] = [
   {
     id: 1,
-    title: 'モダンWebアプリ開発環境構築',
-    description: 'Docker, Next.js, TypeScript, Tailwind CSS, WSLを使った開発環境の基盤構築。保守性とスケーラビリティを意識。',
+    title: 'React Hooksまとめ',
+    description: 'ReactのHooks（useState、useEffect）の使い方をまとめたサンプルコード集。',
     category: 'サンプルコード',
-    techStack: ['Docker', 'Next.js', 'TypeScript', 'Tailwind CSS', 'WSL'],
-    link: 'https://github.com/your-username/portfolio-nextjs-ts',
+    techStack: ['React', 'Next.js', 'TypeScript'],
+    link: '/projects/react_hooks_samples',
   },
   {
     id: 2,
