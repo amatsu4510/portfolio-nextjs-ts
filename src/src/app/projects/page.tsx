@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 // エラーの原因となるnext/linkのインポートを削除し、通常の<a>タグを使用するようにします。
-// import Link from 'next/link'; 
+// import Link from 'next/link';
 
 // --- データ型定義と定数（本来は共通ファイルに切り出すべきもの） ---
 const PROJECT_CATEGORIES = ['すべて', 'Webアプリ', 'サンプルコード', 'Webサイト'];
@@ -28,11 +28,11 @@ const getCategoryColor = (category: string) => categoryColors[category] || 'text
 const ALL_PROJECTS: Project[] = [
   {
     id: 1,
-    title: 'モダンWebアプリ開発環境構築',
-    description: 'Docker, Next.js, TypeScript, Tailwind CSS, WSLを使った開発環境の基盤構築。保守性とスケーラビリティを意識。',
+    title: 'React Hooksまとめ',
+    description: 'ReactのHooks（useState、useEffect）の使い方をまとめたサンプルコード集。',
     category: 'サンプルコード',
-    techStack: ['Docker', 'Next.js', 'TypeScript', 'Tailwind CSS', 'WSL'],
-    link: 'https://github.com/your-username/portfolio-nextjs-ts',
+    techStack: ['React', 'Next.js', 'TypeScript'],
+    link: '/projects/react_hooks_samples',
   },
   {
     id: 2,
@@ -41,15 +41,7 @@ const ALL_PROJECTS: Project[] = [
     category: 'Webサイト',
     techStack: ['Next.js', 'AWS S3', 'AWS CloudFront', 'GitHub Actions'],
     link: '#',
-  },
-  {
-    id: 3,
-    title: 'フルスタック認証システムサンプル',
-    description: 'Next.jsのAPIルートとNextAuth.jsを使用し、データベース連携（例：Prisma + PostgreSQL）によるユーザー認証機能を実装。',
-    category: 'Webアプリ',
-    techStack: ['Next.js', 'NextAuth', 'Prisma', 'PostgreSQL'],
-    link: '#',
-  },
+  }
   // ここにさらに多くのプロジェクトを追加
 ];
 // ----------------------------------------------------------------------
@@ -74,7 +66,7 @@ export default function ProjectsPage() {
   return (
     <div className="min-h-screen bg-zinc-50 font-sans text-zinc-800 dark:bg-zinc-900 dark:text-zinc-200 py-10 sm:py-16">
       <main className="w-full max-w-4xl mx-auto p-4 sm:p-6 space-y-10">
-        
+
         {/* ページタイトル (モバイルではフォントを小さく) */}
         <h1 className="text-3xl sm:text-4xl font-extrabold mb-8 sm:mb-10 border-l-4 border-indigo-500 pl-4">
           全Webアプリ・作品一覧 💻
@@ -82,8 +74,8 @@ export default function ProjectsPage() {
 
         {/* フィルター選択ドロップダウン (モバイルでの可視性を向上) */}
         <div className="mb-8 sm:mb-10 flex flex-col sm:flex-row items-start sm:items-center justify-start space-y-2 sm:space-y-0 sm:space-x-4">
-          <label 
-            htmlFor="category-filter" 
+          <label
+            htmlFor="category-filter"
             className="font-semibold text-zinc-600 dark:text-zinc-400 text-sm sm:text-base"
           >
             カテゴリーで絞り込み:
@@ -105,7 +97,7 @@ export default function ProjectsPage() {
         <div className="grid gap-6 md:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {filteredProjects.length === 0 ? (
             <p className="text-center text-zinc-500 dark:text-zinc-400 py-10 col-span-full">
-              {filterCategory === PROJECT_CATEGORIES[0] 
+              {filterCategory === PROJECT_CATEGORIES[0]
                 ? '現在、登録されているプロジェクトはありません。'
                 : `「${filterCategory}」のプロジェクトはありません。`}
             </p>
@@ -120,17 +112,17 @@ export default function ProjectsPage() {
                   <h3 className="text-xl font-bold text-indigo-600 dark:text-indigo-400 mb-2 sm:mb-0">
                     {project.title}
                   </h3>
-                  <span 
+                  <span
                     className={`text-xs font-bold px-3 py-1 rounded-full ${getCategoryColor(project.category)} flex-shrink-0`}
                   >
                     {project.category}
                   </span>
                 </div>
-                
+
                 <p className="text-zinc-600 dark:text-zinc-300 mb-4 text-sm line-clamp-3">
                   {project.description}
                 </p>
-                
+
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.techStack.map(tech => (
                     <span key={tech} className="text-xs px-2.5 py-0.5 rounded-full bg-zinc-200 dark:bg-zinc-600 text-zinc-700 dark:text-zinc-300 font-medium shadow-sm">
@@ -139,9 +131,8 @@ export default function ProjectsPage() {
                   ))}
                 </div>
 
-                <CustomLink 
-                  href={project.link} 
-                  target="_blank"
+                <CustomLink
+                  href={project.link}
                   rel="noopener noreferrer"
                   className="inline-flex items-center text-indigo-600 dark:text-indigo-400 font-semibold hover:underline text-base mt-2"
                 >
@@ -151,10 +142,10 @@ export default function ProjectsPage() {
             ))
           )}
         </div>
-        
+
         {/* トップページに戻るリンク */}
         <div className="text-center pt-8">
-            <CustomLink 
+            <CustomLink
               href="/"
               className="inline-block text-base font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-200 transition-colors"
             >

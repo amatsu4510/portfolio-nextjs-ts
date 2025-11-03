@@ -23,9 +23,9 @@ const Link: FC<LinkProps> = ({ href, children, ...props }) => <a href={href} {..
 const MobileHeader: FC = () => {
   // モバイルメニューの状態を boolean 型で定義
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-  
+
   // 現在のパスを取得
-  const pathname = usePathname(); 
+  const pathname = usePathname();
 
   // ページ遷移時にメニューを閉じる処理 ---
   useEffect(() => {
