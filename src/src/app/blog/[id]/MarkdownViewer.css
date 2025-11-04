@@ -144,3 +144,11 @@
   font-weight: bold;
   /* テキストの配置はHTMLで指定されているため、ここでは特に変更しない */
 }
+
+.markdown-body img {
+  /* すべての画像の幅を300pxに設定 */
+  width: 400px;
+
+  /* 縦横比を保つためにheightはautoを設定 */
+  height: auto;
+}
