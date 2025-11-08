@@ -161,6 +161,7 @@ export default function Home() {
           {/* Topページでは最新の3件のみを表示 */}
           <div className="grid gap-6 grid-cols-1 md:grid-cols-3">
             {LATEST_PROJECTS.map((project) => (
+                <article>
                 <div
                   key={project.id}
                   className="rounded-xl p-5 sm:p-6 bg-white hover:bg-zinc-50 dark:bg-zinc-800/80 dark:hover:bg-zinc-700/80 shadow-lg transition-shadow hover:shadow-xl"
@@ -196,6 +197,7 @@ export default function Home() {
                     詳細を見る &rarr;
                   </Link>
                 </div>
+                </article>
             ))}
           </div>
 
@@ -219,6 +221,7 @@ export default function Home() {
 
           <div className="grid gap-6 grid-cols-1 md:grid-cols-2">
             {latestPosts.map(({ id, title, date, update }) => (
+              <article>
               <Link
                 key={id}
                 href={`/blog/${id}`}
@@ -241,6 +244,7 @@ export default function Home() {
                   </span>
                 </div>
               </Link>
+              </article>
             ))}
           </div>
           <div className="text-center pt-8">

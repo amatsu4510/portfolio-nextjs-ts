@@ -66,7 +66,7 @@ export default function ProjectsPage() {
   return (
     <div className="min-h-screen bg-zinc-50 font-sans text-zinc-800 dark:bg-zinc-900 dark:text-zinc-200 py-10 sm:py-16">
       <main className="w-full max-w-4xl mx-auto p-4 sm:p-6 space-y-10">
-
+      <article>
         {/* ページタイトル (モバイルではフォントを小さく) */}
         <h1 className="text-3xl sm:text-4xl font-extrabold mb-8 sm:mb-10 border-l-4 border-indigo-500 pl-4">
           全Webアプリ・作品一覧 💻
@@ -152,6 +152,7 @@ export default function ProjectsPage() {
               &larr; トップページに戻る
             </CustomLink>
         </div>
+        </article>
       </main>
     </div>
   );
