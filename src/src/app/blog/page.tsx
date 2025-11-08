@@ -31,21 +31,23 @@ export default async function BlogPage() {
                                         key={id}
                                         className="p-4 border rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 bg-white dark:bg-zinc-800"
                                     >
-                                        {/* 個別記事へのリンク */}
-                                        <Link
-                                            href={`/blog/${id}`}
-                                            className="block text-2xl font-semibold text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
-                                        >
-                                            {title}
-                                        </Link>
+                                    <article>
+                                            {/* 個別記事へのリンク */}
+                                            <Link
+                                                href={`/blog/${id}`}
+                                                className="block text-2xl font-semibold text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+                                            >
+                                                {title}
+                                            </Link>
 
-                                        {/* 投稿日と更新日 */}
-                                        <small className="text-gray-500 dark:text-gray-400 mt-1 block">
-                                        投稿日: {formatDate(date)}
-                                        {update && update !== date && (
-                                            <span className="ml-4">更新日: {formatDate(update)}</span>
-)}
-                                        </small>
+                                            {/* 投稿日と更新日 */}
+                                            <small className="text-gray-500 dark:text-gray-400 mt-1 block">
+                                            投稿日: {formatDate(date)}
+                                            {update && update !== date && (
+                                                <span className="ml-4">更新日: {formatDate(update)}</span>
+                                            )}
+                                            </small>
+                                        </article>
                                     </li>
                                 ))}
                             </ul>

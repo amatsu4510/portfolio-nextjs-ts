@@ -16,7 +16,7 @@ export default async function Post({ params }: { params: Promise<{ id: string }>
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 py-16 px-4">
       <main className="max-w-5xl mx-auto space-y-8">
-
+      <article>
         {/* 記事タイトル */}
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-zinc-900 dark:text-white text-center leading-tight">{postData.title}</h1>
 
@@ -42,6 +42,7 @@ export default async function Post({ params }: { params: Promise<{ id: string }>
             トップページに戻る &rarr;
           </Link>
         </div>
+      </article>
       </main>
     </div>
   );

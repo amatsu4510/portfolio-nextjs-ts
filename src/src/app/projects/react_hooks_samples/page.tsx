@@ -57,6 +57,7 @@ const ReactHooksSamplePage: FC = () => {
     return (
         <div className="min-h-screen bg-white font-sans text-zinc-800 dark:bg-zinc-900 dark:text-zinc-100 py-8 sm:py-12">
             <main className="w-full max-w-5xl mx-auto px-4 sm:px-6 space-y-12">
+                <article>
                 <div className="space-y-6">
                     <div className="text-center space-y-2">
                         {/* ページのメインタイトル */}
@@ -204,6 +205,7 @@ useEffect(() => {
                         </div>
                     </div>
                 </div>
+                </article>
             </main>
         </div>
     );
