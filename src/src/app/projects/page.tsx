@@ -41,7 +41,15 @@ const ALL_PROJECTS: Project[] = [
     category: 'Webサイト',
     techStack: ['Next.js', 'AWS S3', 'AWS CloudFront', 'GitHub Actions'],
     link: '#',
-  }
+  },
+  {
+    id: 3,
+    title: '必殺チャタテムシ駆除捕獲人',
+    description: 'チャタテムシに関する情報をまとめた情報サイト。',
+    category: 'Webサイト',
+    techStack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
+    link: 'https://www.chatachata.jp/',
+  },
   // ここにさらに多くのプロジェクトを追加
 ];
 // ----------------------------------------------------------------------
@@ -113,7 +121,7 @@ export default function ProjectsPage() {
                     {project.title}
                   </h3>
                   <span
-                    className={`text-xs font-bold px-3 py-1 rounded-full ${getCategoryColor(project.category)} flex-shrink-0`}
+                    className={`text-xs font-bold px-3 py-1 rounded-full ${getCategoryColor(project.category)} shrink-0`}
                   >
                     {project.category}
                   </span>

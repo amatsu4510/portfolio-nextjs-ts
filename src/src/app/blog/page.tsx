@@ -16,7 +16,7 @@ export default async function BlogPage() {
             <main className="w-full max-w-5xl mx-auto px-4 sm:px-6 space-y-12">
                 <div className="space-y-6">
                     <div className="text-center space-y-2">
-                        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-600">
+                        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-transparent bg-clip-text bg-linear-to-r from-indigo-500 to-purple-600">
                             Shota Blog
                         </h1>
 
