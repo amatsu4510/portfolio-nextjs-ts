@@ -43,6 +43,22 @@ const ALL_PROJECTS: Project[] = [
     techStack: ['Next.js', 'AWS S3', 'AWS CloudFront', 'GitHub Actions'],
     link: '#',
   },
+  {
+    id: 3,
+    title: '必殺チャタテムシ駆除捕獲人',
+    description: 'チャタテムシに関する情報をまとめた情報サイト。',
+    category: 'Webサイト',
+    techStack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
+    link: 'https://www.chatachata.jp/',
+  },
+  {
+    id: 4,
+    title: 'ECサイトデモプロジェクト',
+    description: 'ECサイトの基本的な機能を備えたデモプロジェクト。商品一覧、カート機能、購入フローなどを実装。',
+    category: 'Webサイト',
+    techStack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
+    link: '/projects/ec_site_demo',
+  },
 ];
 
 // --- Homeで表示する最新ハイライトデータを抽出 ---
@@ -102,15 +118,15 @@ export default function Home() {
             <ul className="space-y-3 sm:space-y-2 text-base sm:text-lg text-zinc-700 dark:text-zinc-300 mb-6 border-b border-zinc-200 dark:border-zinc-700 pb-4">
               {/* LI: モバイルでの固定幅を解除し、sm以上でW-20を適用 */}
               <li className="flex flex-col sm:flex-row items-start sm:items-center">
-                <span className="text-indigo-500 mr-2 font-bold w-auto sm:w-20 sm:flex-shrink-0">名前:</span>
+                <span className="text-indigo-500 mr-2 font-bold w-auto sm:w-20 sm:shrink-0">名前:</span>
                 千葉 翔太
               </li>
               <li className="flex flex-col sm:flex-row items-start sm:items-center">
-                <span className="text-indigo-500 mr-2 font-bold w-auto sm:w-20 sm:flex-shrink-0">生年月日:</span>
+                <span className="text-indigo-500 mr-2 font-bold w-auto sm:w-20 sm:shrink-0">生年月日:</span>
                 2000年7月2日
               </li>
               <li className="flex flex-col sm:flex-row items-start">
-                <span className="text-indigo-500 mr-2 font-bold w-auto sm:w-20 sm:flex-shrink-0">経歴:</span>
+                <span className="text-indigo-500 mr-2 font-bold w-auto sm:w-20 sm:shrink-0">経歴:</span>
                 短大卒業後、組み込みシステム開発5年。<br />現在も組み込み系エンジニアとして勤務しつつ、Web開発を独学中。
               </li>
             </ul>
@@ -161,9 +177,8 @@ export default function Home() {
           {/* Topページでは最新の3件のみを表示 */}
           <div className="grid gap-6 grid-cols-1 md:grid-cols-3">
             {LATEST_PROJECTS.map((project) => (
-                <article>
+                <article key={project.id}>
                 <div
-                  key={project.id}
                   className="rounded-xl p-5 sm:p-6 bg-white hover:bg-zinc-50 dark:bg-zinc-800/80 dark:hover:bg-zinc-700/80 shadow-lg transition-shadow hover:shadow-xl"
                 >
                   <div className="flex justify-between items-start mb-3 h-12">
@@ -221,29 +236,28 @@ export default function Home() {
 
           <div className="grid gap-6 grid-cols-1 md:grid-cols-2">
             {latestPosts.map(({ id, title, date, update }) => (
-              <article>
-              <Link
-                key={id}
-                href={`/blog/${id}`}
-                className="block p-5 sm:p-6 rounded-xl bg-white hover:bg-zinc-50 dark:bg-zinc-800/80 dark:hover:bg-zinc-700/80 shadow-lg transition-transform hover:scale-[1.005]"
-              >
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2">
-                  <h3 className="text-lg sm:text-xl font-bold text-zinc-900 dark:text-white hover:text-indigo-600 transition-colors mb-2 sm:mb-0">
-                    {title}
-                  </h3>
-                  <div className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 flex-shrink-0 ml-0 sm:ml-4 text-left sm:text-right">
-                  <div>投稿日: {new Date(date).toLocaleDateString()}</div>
-                  {update && update !== date && (
-                  <div>更新日: {new Date(update).toLocaleDateString()}</div>
-                  )}
+              <article key={id}>
+                <Link
+                  href={`/blog/${id}`}
+                  className="block p-5 sm:p-6 rounded-xl bg-white hover:bg-zinc-50 dark:bg-zinc-800/80 dark:hover:bg-zinc-700/80 shadow-lg transition-transform hover:scale-[1.005]"
+                >
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2">
+                    <h3 className="text-lg sm:text-xl font-bold text-zinc-900 dark:text-white hover:text-indigo-600 transition-colors mb-2 sm:mb-0">
+                      {title}
+                    </h3>
+                    <div className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 shrink-0 ml-0 sm:ml-4 text-left sm:text-right">
+                    <div>投稿日: {new Date(date).toLocaleDateString()}</div>
+                    {update && update !== date && (
+                    <div>更新日: {new Date(update).toLocaleDateString()}</div>
+                    )}
+                    </div>
                   </div>
-                </div>
-                <div className="mt-4">
-                  <span className="inline-block text-indigo-600 dark:text-indigo-400 font-semibold hover:underline text-sm">
-                    記事を見る &rarr;
-                  </span>
-                </div>
-              </Link>
+                  <div className="mt-4">
+                    <span className="inline-block text-indigo-600 dark:text-indigo-400 font-semibold hover:underline text-sm">
+                      記事を見る &rarr;
+                    </span>
+                  </div>
+                </Link>
               </article>
             ))}
           </div>
@@ -275,7 +289,7 @@ export default function Home() {
                 <ul className="space-y-2">
                   {group.skills.map(skill => (
                     <li key={skill} className="flex items-center text-zinc-700 dark:text-zinc-300 text-base">
-                      <svg className="w-4 h-4 mr-2 text-indigo-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                      <svg className="w-4 h-4 mr-2 text-indigo-500 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
                       {skill}
                     </li>
                   ))}
