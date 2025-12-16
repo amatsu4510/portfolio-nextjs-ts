@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shoat-portfolio.com/sitemap.xml
