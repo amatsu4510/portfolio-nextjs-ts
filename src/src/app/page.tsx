@@ -51,14 +51,6 @@ const ALL_PROJECTS: Project[] = [
     techStack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
     link: 'https://www.chatachata.jp/',
   },
-  {
-    id: 4,
-    title: 'ECサイトデモプロジェクト',
-    description: 'ECサイトの基本的な機能を備えたデモプロジェクト。商品一覧、カート機能、購入フローなどを実装。',
-    category: 'Webサイト',
-    techStack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
-    link: '/projects/ec_site_demo',
-  },
 ];
 
 // --- Homeで表示する最新ハイライトデータを抽出 ---

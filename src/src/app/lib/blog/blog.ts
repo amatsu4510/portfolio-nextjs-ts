@@ -11,7 +11,7 @@ import matter from 'gray-matter';
 const S3_BASE_URL = process.env.NEXT_PUBLIC_BLOG_S3_BASE_URL;
 
 // S3バケット内の 'blog/' フォルダを基準とする
-const BASE_CONTENT_URL = `${S3_BASE_URL}blog/`; 
+const BASE_CONTENT_URL = `${S3_BASE_URL}blog/`;
 
 // 記事一覧メタデータ JSON ファイルの場所
 const POSTS_LIST_URL = `${BASE_CONTENT_URL}posts-list.json`;
@@ -46,9 +46,9 @@ async function fetchWithRevalidate(url: string, revalidate: number = 60) {
     throw new Error("S3 URL is a placeholder. Configure BLOG_S3_BASE_URL.");
   }
 
-  const response = await fetch(url, { 
+  const response = await fetch(url, {
     // ISRの動作を設定
-    next: { revalidate: revalidate } 
+    next: { revalidate: revalidate }
   });
 
   if (!response.ok) {
@@ -96,7 +96,7 @@ export async function getSortedPostsData(): Promise<PostData[]> {
 export async function getPostData(id: string): Promise<PostData> {
   // URLから渡される場合はデコードしてファイル名に変換 (S3キーに安全な文字列へ)
   const fileName = decodeURIComponent(id);
-  
+
   // S3上のマークダウンファイルへのフルパスを構築
   // S3上のパスは BASE_CONTENT_URL/markdown/{fileName}.md を想定
   const markdownUrl = `${BASE_CONTENT_URL}markdown/${fileName}.md`;
