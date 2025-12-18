@@ -8,7 +8,7 @@ import matter from 'gray-matter';
 // デプロイ前に 'BLOG_S3_BASE_URL' 環境変数を設定してください。
 // 例: https://{YOUR_BUCKET_NAME}.s3.{YOUR_REGION}.amazonaws.com/
 //const S3_BASE_URL = process.env.BLOG_S3_BASE_URL || 'https://placeholder-s3-url.com/';
-const S3_BASE_URL = process.env.NEXT_PUBLIC_BLOG_S3_BASE_URL;
+const S3_BASE_URL = process.env.NEXT_PUBLIC_BLOG_CLD_FLONT_BASE_URL;
 
 // S3バケット内の 'blog/' フォルダを基準とする
 const BASE_CONTENT_URL = `${S3_BASE_URL}blog/`;
@@ -36,7 +36,7 @@ async function fetchWithRevalidate(url: string, revalidate: number = 60) {
   // 本番環境では環境変数の設定を必須とする
   if (!S3_BASE_URL) {
     // 開発環境と本番環境で、環境変数が設定されていない場合にクラッシュさせる
-    throw new Error('NEXT_PUBLIC_BLOG_S3_BASE_URL is not set. Please set the S3 base URL environment variable.');
+    throw new Error('NEXT_PUBLIC_BLOG_CLD_FLONT_BASE_URL is not set. Please set the S3 base URL environment variable.');
   }
 
   // 環境変数が設定されていない場合のエラーを防ぐ
