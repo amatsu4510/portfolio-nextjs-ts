@@ -5,12 +5,12 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        NEXT_PUBLIC_BLOG_S3_BASE_URL: https://portfolio-nextjs-ts.s3.ap-northeast-1.amazonaws.com/
+        NEXT_PUBLIC_BLOG_S3_BASE_URL: https://d2z072fjnbmllc.cloudfront.net/
     # 開発環境のホスト側(ローカル)のファイル変更をコンテナに即座に反映
     volumes:
       # ローカルのsrcディレクトリをコンテナの/app/srcにマウント
       - ./src:/app/src
-    
+
     # Next.js 開発時の環境変数設定
     environment:
       # 開発環境 (next dev) を実行
@@ -18,14 +18,14 @@ services:
       # ホットリロード用の監視設定
       WATCHPACK_POLLING: true
       # 他の環境変数があればここに追記
-      NEXT_PUBLIC_BLOG_S3_BASE_URL: https://portfolio-nextjs-ts.s3.ap-northeast-1.amazonaws.com/
-    
+      NEXT_PUBLIC_BLOG_S3_BASE_URL: https://d2z072fjnbmllc.cloudfront.net/
+
     # ターミナルを有効化（対話型モード）
     tty: true
 
     # サービス起動時に実行するコマンド(開発サーバー起動)
     command: sh -c "npm run dev"
-    
+
     # ポートマッピング
     ports:
       - "80:3000"

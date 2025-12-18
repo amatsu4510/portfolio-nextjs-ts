@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        NEXT_PUBLIC_BLOG_S3_BASE_URL: https://portfolio-nextjs-ts.s3.ap-northeast-1.amazonaws.com/
+        NEXT_PUBLIC_BLOG_S3_BASE_URL: https://d2z072fjnbmllc.cloudfront.net/
     # 環境変数設定
     environment:
       # 本番サーバー (next start) を実行
@@ -13,15 +13,15 @@ services:
       # コンテナ内部のポート (Dockerfileで設定済み)
       PORT: 3000
       # 他の環境変数があればここに追記
-      NEXT_PUBLIC_BLOG_S3_BASE_URL: https://portfolio-nextjs-ts.s3.ap-northeast-1.amazonaws.com/
+      NEXT_PUBLIC_BLOG_S3_BASE_URL: https://d2z072fjnbmllc.cloudfront.net/
 
     # サービス起動時に実行するコマンド (本番サーバー起動)
     command: npm start --prefix src
-    
+
     # ポートマッピング
     # 外部の80番ポートをコンテナ内部の3000番ポートにマッピング
     ports:
       - "80:3000"
-      
+
     # 常に再起動する設定 (コンテナが落ちても自動復旧)
     restart: always
