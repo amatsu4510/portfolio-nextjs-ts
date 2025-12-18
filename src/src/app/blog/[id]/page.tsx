@@ -12,6 +12,11 @@ const formatDate = (date: string | Date) => {
 export default async function Post({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const postData = await getPostData(id);
+  const imageBaseUrl = process.env.NEXT_PUBLIC_BLOG_CLD_FLONT_IMAGE_URL || '';
+  const processedContent = postData.content!.replaceAll(
+    '__BLOG_IMAGE__BASE__',
+    imageBaseUrl
+  );
 
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 py-16 px-4">

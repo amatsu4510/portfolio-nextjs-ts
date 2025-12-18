@@ -5,7 +5,8 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        NEXT_PUBLIC_BLOG_S3_BASE_URL: https://d2z072fjnbmllc.cloudfront.net/
+        NEXT_PUBLIC_BLOG_CLD_FLONT_BASE_URL: https://d2z072fjnbmllc.cloudfront.net/
+        NEXT_PUBLIC_BLOG_CLD_FLONT_IMAGE_URL: https://d2z072fjnbmllc.cloudfront.net/
     # 開発環境のホスト側(ローカル)のファイル変更をコンテナに即座に反映
     volumes:
       # ローカルのsrcディレクトリをコンテナの/app/srcにマウント
@@ -18,7 +19,8 @@ services:
       # ホットリロード用の監視設定
       WATCHPACK_POLLING: true
       # 他の環境変数があればここに追記
-      NEXT_PUBLIC_BLOG_S3_BASE_URL: https://d2z072fjnbmllc.cloudfront.net/
+      NEXT_PUBLIC_BLOG_CLD_FLONT_BASE_URL: https://d2z072fjnbmllc.cloudfront.net/
+      NEXT_PUBLIC_BLOG_CLD_FLONT_IMAGE_URL: https://d2z072fjnbmllc.cloudfront.net/
 
     # ターミナルを有効化（対話型モード）
     tty: true
