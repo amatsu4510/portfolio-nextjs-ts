@@ -35,7 +35,7 @@ export default async function Post({ params }: { params: Promise<{ id: string }>
 
         {/* 記事本文 (Markdown → HTML) */}
         <div className='markdown-body'>
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>{postData.content!}</ReactMarkdown>
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>{processedContent!}</ReactMarkdown>
         </div>
 
         {/* ページ下部リンク */}
