@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
       args:
         NEXT_PUBLIC_BLOG_CLD_FLONT_BASE_URL: https://d2z072fjnbmllc.cloudfront.net/
-        NEXT_PUBLIC_BLOG_CLD_FLONT_IMAGE_URL: https://d2z072fjnbmllc.cloudfront.net/
+        NEXT_PUBLIC_BLOG_CLD_FLONT_IMAGE_URL: https://d2z072fjnbmllc.cloudfront.net
     # 環境変数設定
     environment:
       # 本番サーバー (next start) を実行
@@ -15,7 +15,7 @@ services:
       PORT: 3000
       # 他の環境変数があればここに追記
       NEXT_PUBLIC_BLOG_CLD_FLONT_BASE_URL: https://d2z072fjnbmllc.cloudfront.net/
-      NEXT_PUBLIC_BLOG_CLD_FLONT_IMAGE_URL: https://d2z072fjnbmllc.cloudfront.net/
+      NEXT_PUBLIC_BLOG_CLD_FLONT_IMAGE_URL: https://d2z072fjnbmllc.cloudfront.net
 
     # サービス起動時に実行するコマンド (本番サーバー起動)
     command: npm start --prefix src
