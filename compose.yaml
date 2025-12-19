@@ -7,6 +7,8 @@ services:
       args:
         NEXT_PUBLIC_BLOG_CLD_FLONT_BASE_URL: https://d2z072fjnbmllc.cloudfront.net/
         NEXT_PUBLIC_BLOG_CLD_FLONT_IMAGE_URL: https://d2z072fjnbmllc.cloudfront.net
+        NEXT_PUBLIC_BASIC_AUTH_USER: rootUser
+        NEXT_PUBLIC_BASIC_AUTH_PASSWORD: jI4^jRyDg*bD
     # 開発環境のホスト側(ローカル)のファイル変更をコンテナに即座に反映
     volumes:
       # ローカルのsrcディレクトリをコンテナの/app/srcにマウント
@@ -21,6 +23,8 @@ services:
       # 他の環境変数があればここに追記
       NEXT_PUBLIC_BLOG_CLD_FLONT_BASE_URL: https://d2z072fjnbmllc.cloudfront.net/
       NEXT_PUBLIC_BLOG_CLD_FLONT_IMAGE_URL: https://d2z072fjnbmllc.cloudfront.net
+      NEXT_PUBLIC_BASIC_AUTH_USER: rootUser
+      NEXT_PUBLIC_BASIC_AUTH_PASSWORD: jI4^jRyDg*bD
 
     # ターミナルを有効化（対話型モード）
     tty: true
