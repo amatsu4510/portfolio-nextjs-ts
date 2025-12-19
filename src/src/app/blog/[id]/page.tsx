@@ -1,7 +1,7 @@
 import { getPostData, getSortedPostsData, PostData } from '@/app/lib/blog/blog';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
-import './MarkdownViewer.css'
+import '@/styles/MarkdownViewer.css';
 import remarkGfm from 'remark-gfm';
 
 const formatDate = (date: string | Date) => {
