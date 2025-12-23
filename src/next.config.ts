@@ -12,8 +12,8 @@ const nextConfig: NextConfig = {
           pathname: '/**',
         },
         {
-        protocol: 'https',
-        hostname: '**.amazonaws.com', // S3のドメインを許可
+          protocol: 'http', // 万が一HTTPでリクエストが飛んでいる場合のため
+          hostname: 'shoat-portfolio.com',
         },
       ],
     },
