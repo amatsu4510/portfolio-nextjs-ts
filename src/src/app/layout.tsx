@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Shota Portpolio",
+  title: "Shota Portfolio",
   description: "組み込みエンジニアShotaのWeb開発ポートフォリオ。Next.js, TypeScript, Tailwind CSS, AWSを用いたモダンな開発スキルと具体的な作品（Webアプリ・サイト）を紹介します。",
 };
 
