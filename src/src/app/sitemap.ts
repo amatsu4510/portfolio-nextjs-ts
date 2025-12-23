@@ -1,7 +1,17 @@
 import { MetadataRoute } from 'next';
+import { getSortedPostsData } from '@/app/lib/blog/blog';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = 'https://shoat-portfolio.com';
+
+    /* ブログ記事のメタデータ取得 */
+    const posts = await getSortedPostsData();
+
+    /* 動的ページのURL配列を作成 */
+    const postUrls = posts.map((post) => ({
+        url: `${baseUrl}/blog/${post.id}`,
+        lastModified: post.update,
+    }));
 
     return [
         {
@@ -16,5 +26,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
             url: `${baseUrl}/blog`,
             lastModified: new Date(),
         },
+        ...postUrls,
     ];
 }
