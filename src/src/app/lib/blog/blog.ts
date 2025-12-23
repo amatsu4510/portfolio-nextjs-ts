@@ -11,7 +11,7 @@ import matter from 'gray-matter';
 const S3_BASE_URL = process.env.NEXT_PUBLIC_BLOG_CLD_FLONT_BASE_URL;
 
 // S3バケット内の 'blog/' フォルダを基準とする
-const BASE_CONTENT_URL = `${S3_BASE_URL}blog/`;
+const BASE_CONTENT_URL = `${S3_BASE_URL}posts/`;
 
 // 記事一覧メタデータ JSON ファイルの場所
 const POSTS_LIST_URL = `${BASE_CONTENT_URL}posts-list.json`;
