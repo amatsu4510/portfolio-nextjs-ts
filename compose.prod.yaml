@@ -20,6 +20,14 @@ services:
       NEXT_PUBLIC_BLOG_CLD_FLONT_IMAGE_URL: https://shoat-portfolio.com
       NEXT_PUBLIC_BASIC_AUTH_USER: rootUser
       NEXT_PUBLIC_BASIC_AUTH_PASSWORD: jI4^jRyDg*bD
+    # Cloud Watchにログ飛ばす設定
+    logging:
+          driver: "awslogs"
+          options:
+            awslogs-region: "ap-northeast-1"  # 東京リージョンの場合
+            awslogs-group: "NextJS-Docker-Logs" # CloudWatch上のグループ名
+            awslogs-stream: "app-container"     # ログストリーム名
+            awslogs-create-group: "true"        # グループがなければ自動作成
 
     # サービス起動時に実行するコマンド (本番サーバー起動)
     command: npm start --prefix src
