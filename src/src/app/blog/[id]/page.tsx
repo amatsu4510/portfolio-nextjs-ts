@@ -13,7 +13,7 @@ const formatDate = (date: string | Date) => {
 export default async function Post({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const postData = await getPostData(id);
-  const imageBaseUrl = '';
+  const imageBaseUrl = process.env.NEXT_PUBLIC_BLOG_CLD_FLONT_IMAGE_URL || '';
   const processedContent = postData.content!.replaceAll(
     '__BLOG_IMAGE__BASE__',
     imageBaseUrl
