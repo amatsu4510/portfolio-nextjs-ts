@@ -1,5 +1,6 @@
 import { getPostData, getSortedPostsData, PostData } from '@/app/lib/blog/blog';
 import Link from 'next/link';
+import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import '@/styles/MarkdownViewer.css';
 import remarkGfm from 'remark-gfm';
@@ -18,6 +19,22 @@ export default async function Post({ params }: { params: Promise<{ id: string }>
     imageBaseUrl
   );
 
+  // 📸 ReactMarkdown用のカスタムレンダラー
+  const MarkdownComponents = {
+    img: (props: any) => {
+      return (
+          <Image
+            src={props.src}
+            alt={props.alt || ''}
+            width={1920}    // 基準となる幅
+            height={1080}   // 基準となる高さ（アスペクト比維持のため）
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, (max-width: 1920px) 80vw, 1400px"
+            quality={85}   // 画質とファイルサイズのバランス
+          />
+      );
+    }
+  };
+
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 py-16 px-4">
       <main className="max-w-5xl mx-auto space-y-8">
@@ -35,7 +52,7 @@ export default async function Post({ params }: { params: Promise<{ id: string }>
 
         {/* 記事本文 (Markdown → HTML) */}
         <div className='markdown-body'>
-          <ReactMarkdown remarkPlugins={[remarkGfm]}>{processedContent!}</ReactMarkdown>
+          <ReactMarkdown remarkPlugins={[remarkGfm]} components={MarkdownComponents}>{processedContent!}</ReactMarkdown>
         </div>
 
         {/* ページ下部リンク */}
