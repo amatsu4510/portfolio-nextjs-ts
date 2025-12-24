@@ -1,10 +1,11 @@
-// サーバーコンポーネントとして動作させる
-import { getSortedPostsData, PostData } from '../lib/blog/blog';
 import Link from 'next/link';
 import { Metadata } from 'next';
+import { PostData } from '../type/Type';
+import { getSortedPostsData } from '../lib/blog/blog';
+import { formatDate } from '../lib/common/common';
 
 export const metadata: Metadata = {
-  title: "Blog一覧", // templateが適用され「Blog一覧 | Shota Portfolio」になります
+    title: "Blog一覧",
     description: "組み込みエンジニアShotaの技術ブログ。Next.jsやAWSなどに関する知見を発信しています。",
     openGraph: {
         title: "Blog一覧 | Shota Portfolio",
@@ -15,12 +16,6 @@ export const metadata: Metadata = {
 
 const BlogPage = async () => {
     const allPostsData: PostData[] = await getSortedPostsData();
-
-    // 日付を「YYYY-MM-DD」形式に整形する関数
-    const formatDate = (date: string | Date) => {
-        const d = typeof date === 'string' ? new Date(date) : date;
-        return d.toLocaleDateString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit' });
-    };
 
     return (
         <div className="min-h-screen bg-white font-sans text-zinc-800 dark:bg-zinc-900 dark:text-zinc-100 py-8 sm:py-12">

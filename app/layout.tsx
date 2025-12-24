@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Header from './component/Header';
-import Footer from "./component/Footer";
+import Header from './component/common/Header';
+import Footer from './component/common/Footer';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -50,12 +50,10 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        {/* 1. ナビゲーションバー (ヘッダー) - stickyで固定 */}
+        {/* 1. ナビゲーションバー (ヘッダー) */}
         <Header />
-
         {/* メインコンテンツ */}
         {children}
-
         {/* フッター */}
         <Footer />
       </body>

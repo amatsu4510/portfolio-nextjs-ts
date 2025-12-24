@@ -1,11 +1,10 @@
 'use client';
-import React, { useState, useEffect, type FC } from 'react';
-// Next.js App RouterのPageコンポーネントは通常、FC型で十分です
+import { useState, useEffect, type FC } from 'react';
 
-// 日本時間（JST）の時刻文字列を取得するヘルパー関数
-// 戻り値の型を明示的に 'string' に指定
+/* 日本時間（JST）の時刻文字列を取得するヘルパー関数 */
+/* 戻り値の型を明示的に 'string' に指定 */
 const getJSTString = (): string => {
-    // toLocaleTimeStringでtimeZoneを指定することで、簡単にJSTを取得できる
+    /* toLocaleTimeStringでtimeZoneを指定することで、簡単にJSTを取得できる */
     return new Date().toLocaleTimeString('ja-JP', {
         timeZone: 'Asia/Tokyo',
         hour: '2-digit',
@@ -14,33 +13,31 @@ const getJSTString = (): string => {
     });
 };
 
-// ReactHooksSamplePageコンポーネントをFC (Function Component) 型として定義
+/* ReactHooksSamplePageコンポーネントをFC (Function Component) 型として定義 */
 const ReactHooksSamplePage: FC = () => {
-    // --- 1. useState (カウンター) ---
-    // 状態変数の型を <number> と明示的に指定
+    /* 状態変数の型を <number> と明示的に指定 */
     const [count, setCount] = useState<number>(0);
 
-    // 関数に型定義 (React.MouseEvent<HTMLButtonElement> や void) を追加
+    /* 関数に型定義 (React.MouseEvent<HTMLButtonElement> や void) を追加 */
     const handleCountUp = (): void => {
-        // 状態更新関数形式（prevState => newState）を使う
+        /* 状態更新関数形式（prevState => newState）を使う */
         setCount(prevCount => prevCount + 1);
     }
     const handleCountReset = (): void => {
         setCount(0);
     }
 
-    // --- 2. useState & useEffect (時計) ---
-    // 状態変数の型を <string> と明示的に指定
+    /* 状態変数の型を <string> と明示的に指定 */
     const [japanTime, setJapanTime] = useState<string>(getJSTString());
 
-    // 副作用: 1秒ごとに時刻を更新
+    /* 副作用: 1秒ごとに時刻を更新 */
     useEffect(() => {
-        // setIntervalの戻り値の型はNodeJS.Timeoutを使用
+        /* setIntervalの戻り値の型はNodeJS.Timeoutを使用 */
         const timerId: NodeJS.Timeout = setInterval(() => {
             setJapanTime(getJSTString());
         }, 1000); // 1000ミリ秒 = 1秒ごとに実行
 
-        // クリーンアップ関数: タイマーを停止する
+        /* クリーンアップ関数: タイマーを停止する */
         return () => clearInterval(timerId);
     }, []); // 依存配列が空（[]）
 
@@ -61,7 +58,7 @@ const ReactHooksSamplePage: FC = () => {
                 <div className="space-y-6">
                     <div className="text-center space-y-2">
                         {/* ページのメインタイトル */}
-                        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-600">
+                        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-transparent bg-clip-text bg-linear-to-r from-indigo-500 to-purple-600">
                             React Hooks まとめ
                         </h1>
 
@@ -81,7 +78,7 @@ const ReactHooksSamplePage: FC = () => {
                             </ul>
 
                             {/* サンプル一覧セクション */}
-                            <h2 className="text-3xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-600 mt-10 border-b pb-2 border-zinc-200 dark:border-zinc-700">
+                            <h2 className="text-3xl font-extrabold tracking-tight text-transparent bg-clip-text bg-linear-to-r from-indigo-500 to-purple-600 mt-10 border-b pb-2 border-zinc-200 dark:border-zinc-700">
                                 サンプル一覧
                             </h2>
 
@@ -92,7 +89,7 @@ const ReactHooksSamplePage: FC = () => {
 
                             {/* カウンターの表示 */}
                             <p className="text-4xl font-extrabold mt-4 text-center">
-                                現在のカウント: <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-500">{count}</span>
+                                現在のカウント: <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-600 to-indigo-500">{count}</span>
                             </p>
 
                             {/* ボタンエリア */}
@@ -142,7 +139,7 @@ const handleCountReset = (): void => {
                             </h3>
 
                             <p className="text-5xl font-extrabold mt-4 text-center">
-                                JST: <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-teal-400">{japanTime}</span>
+                                JST: <span className="text-transparent bg-clip-text bg-linear-to-r from-green-500 to-teal-400">{japanTime}</span>
                             </p>
                             <p className="text-center text-sm text-zinc-500 dark:text-zinc-400">（この時刻は1秒ごとに更新されます）</p>
 
