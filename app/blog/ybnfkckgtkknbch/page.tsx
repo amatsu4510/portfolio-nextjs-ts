@@ -3,26 +3,26 @@
 import { useState, useRef, UIEvent } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import '@/styles/MarkdownViewer.css';
+import '../../../styles/MarkdownViewer.css'
 
 const BlogPreviewPage = () => {
   const [content, setContent] = useState('');
   const imageBaseUrl = process.env.NEXT_PUBLIC_BLOG_CLD_FLONT_IMAGE_URL || '';
 
-  // スクロール同期用のRef
+  /* スクロール同期用のRef */
   const editorRef = useRef<HTMLTextAreaElement>(null);
   const previewRef = useRef<HTMLDivElement>(null);
 
-  // エディタのスクロールに合わせてプレビューを動かす
+  /* エディタのスクロールに合わせてプレビューを動かす */
   const handleScroll = (e: UIEvent<HTMLTextAreaElement>) => {
     const editor = editorRef.current;
     const preview = previewRef.current;
 
     if (editor && preview) {
-      // スクロール率を計算 (現在の位置 / スクロール可能な最大幅)
+      /* スクロール率を計算 (現在の位置 / スクロール可能な最大幅) */
       const scrollPercentage = editor.scrollTop / (editor.scrollHeight - editor.clientHeight);
 
-      // プレビュー側のスクロール位置を決定
+      /* プレビュー側のスクロール位置を決定 */
       preview.scrollTop = scrollPercentage * (preview.scrollHeight - preview.clientHeight);
     }
   };
