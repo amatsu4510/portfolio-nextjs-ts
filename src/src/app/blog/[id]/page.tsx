@@ -5,6 +5,39 @@ import ReactMarkdown from 'react-markdown';
 import '@/styles/MarkdownViewer.css';
 import remarkGfm from 'remark-gfm';
 
+// 動的メタデータの生成
+export const generateMetadata = async ({ params }: { params: Promise<{ id: string }> }) => {
+  const { id } = await params;
+  const postData = await getPostData(id);
+
+  // 記事が存在しない場合のフォールバック
+  if (!postData) {
+    return {
+      title: "記事が見つかりません",
+    };
+  }
+
+  // descriptionの優先順位: 1. 手動JSONデータ 2. 本文の冒頭 3. デフォルト文
+  const siteDescription =
+    postData.description ||
+    `${postData.title}に関するブログ記事です。`;
+  return {
+    title: postData.title,
+    description: siteDescription, // ここに反映
+    openGraph: {
+      title: postData.title,
+      description: siteDescription, // SNS用にも反映
+      url: `https://shoat-portfolio.com/blog/${id}`,
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: postData.title,
+      description: siteDescription,
+    },
+  };
+};
+
 const formatDate = (date: string | Date) => {
   const d = typeof date === 'string' ? new Date(date) : date;
   return d.toLocaleDateString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit' });

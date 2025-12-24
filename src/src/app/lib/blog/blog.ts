@@ -24,6 +24,7 @@ export type PostData = {
   date: string;
   update: string;
   title: string;
+  description: string;
   content?: string; // getSortedPostsDataでは含まれないためオプショナルに
 };
 
@@ -94,32 +95,32 @@ export async function getSortedPostsData(): Promise<PostData[]> {
  * @returns {Promise<PostData>} 個別の投稿データ
  */
 export async function getPostData(id: string): Promise<PostData> {
-  // URLから渡される場合はデコードしてファイル名に変換 (S3キーに安全な文字列へ)
   const fileName = decodeURIComponent(id);
-
-  // S3上のマークダウンファイルへのフルパスを構築
-  // S3上のパスは BASE_CONTENT_URL/markdown/{fileName}.md を想定
   const markdownUrl = `${BASE_CONTENT_URL}markdown/${fileName}.md`;
 
   try {
     console.log('Fetching single post from S3:', markdownUrl);
 
-    // S3から個別マークダウンファイルの内容を取得
     const response = await fetchWithRevalidate(markdownUrl, 60);
     const fileContents = await response.text();
 
-    // gray-matterを使って、メタデータセクションをパースします
+    // gray-matterを使って、メタデータセクションをパース
     const matterResult = matter(fileContents);
 
+    // 🌟 修正箇所: description を含めて返却するようにします
     return {
       id,
-      content: matterResult.content, // Markdown文字列
-      // matterResult.data から title, date, update を取得
-      ...(matterResult.data as { title: string; date: string; update: string }),
+      content: matterResult.content,
+      // matterResult.data から title, date, update, description を取得
+      ...(matterResult.data as {
+        title: string;
+        date: string;
+        update: string;
+        description: string; // ← ここに追加
+      }),
     };
   } catch (error) {
     console.error(`Error in getPostData for ID ${id}:`, error);
-    // 記事が見つからない、またはアクセスできない場合はエラーを投げる
     throw new Error(`Post not found or inaccessible: ${id}`);
   }
 }

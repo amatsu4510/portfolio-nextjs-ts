@@ -20,7 +20,7 @@ const Link: FC<LinkProps> = ({ href, children, ...props }) => <a href={href} {..
  * 状態管理（メニュー開閉）を持つため、"use client" ディレクティブが必要です。
  */
 // export default を直接使用して、宣言された値が読み込まれない警告を解消します
-const MobileHeader: FC = () => {
+const Header: FC = () => {
   // モバイルメニューの状態を boolean 型で定義
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
@@ -91,4 +91,4 @@ const MobileHeader: FC = () => {
   );
 }
 
-export default MobileHeader;
+export default Header;
