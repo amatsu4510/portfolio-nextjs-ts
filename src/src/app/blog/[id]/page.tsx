@@ -1,6 +1,6 @@
 import { getPostData, getSortedPostsData, PostData } from '@/app/lib/blog/blog';
 import Link from 'next/link';
-import Image from 'next/image';
+// import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import '@/styles/MarkdownViewer.css';
 import remarkGfm from 'remark-gfm';
@@ -10,7 +10,7 @@ const formatDate = (date: string | Date) => {
   return d.toLocaleDateString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit' });
 };
 
-export default async function Post({ params }: { params: Promise<{ id: string }> }) {
+const Post = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
   const postData = await getPostData(id);
   const imageBaseUrl = process.env.NEXT_PUBLIC_BLOG_CLD_FLONT_IMAGE_URL || '';
@@ -70,10 +70,4 @@ export default async function Post({ params }: { params: Promise<{ id: string }>
   );
 }
 
-// 静的生成パス
-export async function generateStaticParams() {
-  const allPosts = await getSortedPostsData();
-  return allPosts.map((post: PostData) => ({
-    id: post.id,
-  }));
-}
+export default Post;

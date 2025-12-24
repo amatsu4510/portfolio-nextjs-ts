@@ -5,7 +5,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import '@/styles/MarkdownViewer.css';
 
-export default function BlogPreviewPage() {
+const BlogPreviewPage = () => {
   const [content, setContent] = useState('');
   const imageBaseUrl = process.env.NEXT_PUBLIC_BLOG_CLD_FLONT_IMAGE_URL || '';
 
@@ -61,3 +61,5 @@ export default function BlogPreviewPage() {
     </div>
   );
 }
+
+export default BlogPreviewPage;

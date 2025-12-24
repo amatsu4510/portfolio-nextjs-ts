@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, ReactNode, FC } from 'react';
+import { useEffect, useState, ReactNode, FC } from 'react';
 import { usePathname } from 'next/navigation';
 
 // LinkコンポーネントのPropsの型を定義

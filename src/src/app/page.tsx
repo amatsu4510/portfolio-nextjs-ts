@@ -64,7 +64,7 @@ const LEARNING_SUMMARY = [
 ];
 
 /* トップページ */
-export default function Home() {
+const Home = () => {
 
   /* ブログ記事の状態変数定義 */
   const [latestPosts, setLatestPosts] = useState<PostData[]>([]);
@@ -294,3 +294,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Home;
