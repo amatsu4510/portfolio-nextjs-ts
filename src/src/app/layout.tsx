@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Link from 'next/link';
 import "./globals.css";
-import MobileHeader from './component/Header';
+import Header from './component/Header';
 import Footer from "./component/Footer";
 
 const geistSans = Geist({
@@ -16,8 +15,31 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Shota Portfolio",
-  description: "組み込みエンジニアShotaのWeb開発ポートフォリオ。Next.js, TypeScript, Tailwind CSS, AWSを用いたモダンな開発スキルと具体的な作品（Webアプリ・サイト）を紹介します。",
+  title: {
+    template: "%s | Shota Portfolio",
+    default: "Shota Portfolio",
+  },
+  icons: {
+    icon: "/icon.png",
+    shortcut: "/icon.png",
+    apple: "/icon.png",
+  },
+  description: "Next.js, TypeScript, AWSを活用したモダンなWeb開発を手掛けるShotaのポートフォリオサイトです。",
+  keywords: ["組み込みエンジニア", "Web開発", "Next.js", "TypeScript", "AWS", "Shota", "ポートフォリオ"],
+  authors: [{ name: "Shota" }],
+  openGraph: {
+    title: "Shota Portfolio",
+    description: "Next.js, TypeScript, AWSを活用したモダンなWeb開発を手掛けるShotaのポートフォリオサイトです。",
+    url: "https://shoat-portfolio.com",
+    siteName: "Shota Portfolio",
+    locale: "ja_JP",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Shota Portfolio",
+    description: "組み込み × Webエンジニア Shotaのポートフォリオ",
+  },
 };
 
 export default function RootLayout({
@@ -29,7 +51,7 @@ export default function RootLayout({
     <html lang="ja">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         {/* 1. ナビゲーションバー (ヘッダー) - stickyで固定 */}
-        <MobileHeader />
+        <Header />
 
         {/* メインコンテンツ */}
         {children}
