@@ -2,7 +2,7 @@
 import { getSortedPostsData, PostData } from '@/app/lib/blog/blog';
 import Link from 'next/link';
 
-export default async function BlogPage() {
+const BlogPage = async () => {
     const allPostsData: PostData[] = await getSortedPostsData();
 
     // 日付を「YYYY-MM-DD」形式に整形する関数
@@ -79,3 +79,5 @@ export default async function BlogPage() {
         </div>
     );
 }
+
+export default BlogPage;
