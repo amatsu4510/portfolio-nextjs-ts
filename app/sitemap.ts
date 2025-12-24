@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { getSortedPostsData } from '@/app/lib/blog/blog';
+import { getSortedPostsData } from './lib/blog/blog';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = 'https://shoat-portfolio.com';

@@ -5,32 +5,19 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        NEXT_PUBLIC_BLOG_CLD_FLONT_BASE_URL: https://shoat-portfolio.com/
-        NEXT_PUBLIC_BLOG_CLD_FLONT_IMAGE_URL: https://shoat-portfolio.com
-        NEXT_PUBLIC_BASIC_AUTH_USER: rootUser
-        NEXT_PUBLIC_BASIC_AUTH_PASSWORD: jI4^jRyDg*bD
+        NEXT_PUBLIC_BLOG_CLD_FLONT_BASE_URL: ${NEXT_PUBLIC_BLOG_CLD_FLONT_BASE_URL}
+        NEXT_PUBLIC_BLOG_CLD_FLONT_IMAGE_URL: ${NEXT_PUBLIC_BLOG_CLD_FLONT_IMAGE_URL}
     # 開発環境のホスト側(ローカル)のファイル変更をコンテナに即座に反映
     volumes:
-      # ローカルのsrcディレクトリをコンテナの/app/srcにマウント
-      - ./src:/app/src
+      - .:/app              # カレントディレクトリ全体を /app に同期
+      - /app/node_modules   # node_modulesはホスト側の物を使わずコンテナ側を優先（重要
 
     # Next.js 開発時の環境変数設定
-    environment:
-      # 開発環境 (next dev) を実行
-      NODE_ENV: development
-      # ホットリロード用の監視設定
-      WATCHPACK_POLLING: true
-      # 他の環境変数があればここに追記
-      NEXT_PUBLIC_BLOG_CLD_FLONT_BASE_URL: https://shoat-portfolio.com/
-      NEXT_PUBLIC_BLOG_CLD_FLONT_IMAGE_URL: https://shoat-portfolio.com
-      NEXT_PUBLIC_BASIC_AUTH_USER: rootUser
-      NEXT_PUBLIC_BASIC_AUTH_PASSWORD: jI4^jRyDg*bD
-
-    # ターミナルを有効化（対話型モード）
-    tty: true
+    env_file:
+    - .env.local
 
     # サービス起動時に実行するコマンド(開発サーバー起動)
-    command: sh -c "npm run dev"
+    command: npm run dev
 
     # ポートマッピング
     ports:

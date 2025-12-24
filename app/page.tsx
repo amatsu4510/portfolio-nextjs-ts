@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { getSortedPostsData, PostData } from '@/app/lib/blog/blog';
+import { getSortedPostsData, PostData } from './lib/blog/blog';
 
 // --- データ型定義 ---
 interface Project {

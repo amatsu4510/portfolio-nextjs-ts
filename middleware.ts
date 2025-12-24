@@ -12,8 +12,8 @@ export function middleware(req: NextRequest) {
       const [user, pwd] = atob(authValue).split(':');
 
       // ユーザー名とパスワードを任意に設定（環境変数にするのがベストです）
-      const ADMIN_USER = process.env.NEXT_PUBLIC_BASIC_AUTH_USER;
-      const ADMIN_PASS = process.env.NEXT_PUBLIC_BASIC_AUTH_PASSWORD;
+      const ADMIN_USER = process.env.BASIC_AUTH_USER;
+      const ADMIN_PASS = process.env.BASIC_AUTH_PASSWORD;
 
       if (user === ADMIN_USER && pwd === ADMIN_PASS) {
         return NextResponse.next();

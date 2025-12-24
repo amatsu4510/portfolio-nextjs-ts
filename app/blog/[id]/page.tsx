@@ -1,4 +1,4 @@
-import { getPostData, getSortedPostsData, PostData } from '@/app/lib/blog/blog';
+import { getPostData, getSortedPostsData, PostData } from '../../lib/blog/blog';
 import Link from 'next/link';
 // import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';

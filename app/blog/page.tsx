@@ -1,5 +1,5 @@
 // サーバーコンポーネントとして動作させる
-import { getSortedPostsData, PostData } from '@/app/lib/blog/blog';
+import { getSortedPostsData, PostData } from '../lib/blog/blog';
 import Link from 'next/link';
 import { Metadata } from 'next';
 
