@@ -20,9 +20,9 @@ export const metadata: Metadata = {
     default: "Shota Portfolio",
   },
   icons: {
-    icon: "/icon.png",
-    shortcut: "/icon.png",
-    apple: "/icon.png",
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
   },
   description: "Next.js, TypeScript, AWSを活用したモダンなWeb開発を手掛けるShotaのポートフォリオサイトです。",
   keywords: ["組み込みエンジニア", "Web開発", "Next.js", "TypeScript", "AWS", "Shota", "ポートフォリオ"],
