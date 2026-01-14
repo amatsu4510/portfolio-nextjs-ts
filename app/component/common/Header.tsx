@@ -2,6 +2,7 @@
 
 import { useEffect, useState, ReactNode, FC } from 'react';
 import { usePathname } from 'next/navigation';
+import Image from 'next/image';
 
 // LinkコンポーネントのPropsの型を定義
 interface LinkProps {
@@ -47,9 +48,18 @@ const Header: FC = () => {
   return (
     <header className="sticky top-0 z-20 w-full bg-white/90 backdrop-blur-sm dark:bg-zinc-900/90 shadow-lg">
       <nav className="w-full max-w-5xl mx-auto flex justify-between items-center py-4 px-4 sm:px-6">
-        <span className="text-xl font-bold text-indigo-600 dark:text-indigo-400">
-          千葉翔太 | Portfolio
-        </span>
+        <div className="flex items-center gap-2">
+          <Image
+            src="/favicon.ico"
+            alt="Site Icon"
+            width={24}
+            height={24}
+            className="rounded"
+          />
+          <span className="text-xl font-bold text-indigo-600 dark:text-indigo-400">
+            千葉翔太 | Portfolio
+          </span>
+        </div>
 
         {/* デスクトップナビゲーション (md以上で表示) */}
         <div className="hidden md:flex space-x-6 text-sm font-medium">
