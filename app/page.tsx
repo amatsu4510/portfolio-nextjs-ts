@@ -71,10 +71,6 @@ const Home = () => {
                 <span className="text-indigo-500 mr-2 font-bold w-auto sm:w-20 sm:shrink-0">名前:</span>
                 千葉 翔太
               </li>
-              <li className="flex flex-col sm:flex-row items-start sm:items-center">
-                <span className="text-indigo-500 mr-2 font-bold w-auto sm:w-20 sm:shrink-0">生年月日:</span>
-                2000年7月2日
-              </li>
               <li className="flex flex-col sm:flex-row items-start">
                 <span className="text-indigo-500 mr-2 font-bold w-auto sm:w-20 sm:shrink-0">経歴:</span>
                 短大卒業後、組み込みシステム開発5年。<br />現在も組み込み系エンジニアとして勤務しつつ、Web開発を独学中。

@@ -57,7 +57,7 @@ const Header: FC = () => {
             className="rounded"
           />
           <span className="text-xl font-bold text-indigo-600 dark:text-indigo-400">
-            千葉翔太 | Portfolio
+            Shota | Portfolio
           </span>
         </div>
 
