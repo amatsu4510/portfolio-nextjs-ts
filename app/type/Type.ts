@@ -1,4 +1,17 @@
+interface CourseContentType {
+  frontend:string;
+  infra:string;
+  devenv:string;
+  goal:string;
+}
+
 // --- データ型定義 ---
+export interface TopPageAbout {
+  name: string;
+  career: string;
+  course_content: CourseContentType;
+  gitUrl:string;
+}
 
 /* プロジェクトデータ型 */
 export interface Project {

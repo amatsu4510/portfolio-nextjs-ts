@@ -1,44 +1,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Project } from '../type/Type';
+import { ALL_PROJECTS, getCategoryColor, PROJECT_CATEGORIES } from '../config/projectConfig';
 import Link from 'next/link';
-
-const PROJECT_CATEGORIES = ['すべて', 'Webアプリ', 'サンプルコード', 'Webサイト'];
-const categoryColors: { [key: string]: string } = {
-  'Webアプリ': 'text-red-500 bg-red-100 dark:bg-red-900/50 dark:text-red-300',
-  'サンプルコード': 'text-green-500 bg-green-100 dark:bg-green-900/50 dark:text-green-300',
-  'Webサイト': 'text-purple-500 bg-purple-100 dark:bg-purple-900/50 dark:text-purple-300',
-  'すべて': 'text-indigo-500 bg-indigo-100 dark:bg-indigo-900/50 dark:text-indigo-300',
-};
-const getCategoryColor = (category: string) => categoryColors[category] || 'text-gray-500 bg-gray-200 dark:bg-gray-600/50 dark:text-gray-400';
-const ALL_PROJECTS: Project[] = [
-  {
-    id: 1,
-    title: 'React Hooksまとめ',
-    description: 'ReactのHooks（useState、useEffect）の使い方をまとめたサンプルコード集。',
-    category: 'サンプルコード',
-    techStack: ['React', 'Next.js', 'TypeScript'],
-    link: '/projects/react_hooks_samples',
-  },
-  {
-    id: 2,
-    title: 'ポートフォリオサイト (AWSデプロイ)',
-    description: 'このサイト自体。Next.jsのSSG機能を利用し、AWS S3とCloudFrontを用いたサーバーレスデプロイパイプラインを構築。',
-    category: 'Webサイト',
-    techStack: ['Next.js', 'AWS S3', 'AWS CloudFront', 'GitHub Actions'],
-    link: '#',
-  },
-  {
-    id: 3,
-    title: '必殺チャタテムシ駆除捕獲人',
-    description: 'チャタテムシに関する情報をまとめた情報サイト。',
-    category: 'Webサイト',
-    techStack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
-    link: 'https://www.chatachata.jp/',
-  },
-  // ここにさらに多くのプロジェクトを追加
-];
 // ----------------------------------------------------------------------
 
 const ProjectsPage = () => {

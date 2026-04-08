@@ -1,59 +1,10 @@
 import Link from 'next/link';
-import { Project } from './type/Type';
+import { ALL_PROJECTS, LATEST_PROJECTS, getCategoryColor } from './config/projectConfig';
+import { topPageData, LEARNING_SUMMARY } from './config/topPageConfig'
 import Top2Blog from './component/Home/Top2Blog';
-
-/* カテゴリーごとの色を定義（tailwindのクラス名）*/
-const categoryColors: { [key: string]: string } = {
-  'Webアプリ': 'text-red-500 bg-red-100 dark:bg-red-900/50 dark:text-red-300',
-  'サンプルコード': 'text-green-500 bg-green-100 dark:bg-green-900/50 dark:text-green-300',
-  'Webサイト': 'text-purple-500 bg-purple-100 dark:bg-purple-900/50 dark:text-purple-300',
-  'すべて': 'text-indigo-500 bg-indigo-100 dark:bg-indigo-900/50 dark:text-indigo-300',
-};
-
-/* カテゴリーの色を取得するヘルパー関数 */
-const getCategoryColor = (category: string) => categoryColors[category] || 'text-gray-500 bg-gray-200 dark:bg-gray-600/50 dark:text-gray-400';
-
-/* プロジェクト TODO:後からS3にjsonおいて取得できるようにする */
-const ALL_PROJECTS: Project[] = [
-  {
-    id: 1,
-    title: 'React Hooksまとめ',
-    description: 'ReactのHooks（useState、useEffect）の使い方をまとめたサンプルコード集。',
-    category: 'サンプルコード',
-    techStack: ['React', 'Next.js', 'TypeScript'],
-    link: '/projects/react_hooks_samples',
-  },
-  {
-    id: 2,
-    title: 'ポートフォリオサイト (AWSデプロイ)',
-    description: 'このサイト自体。Next.jsのSSG機能を利用し、AWS S3とCloudFrontを用いたサーバーレスデプロイパイプラインを構築。',
-    category: 'Webサイト',
-    techStack: ['Next.js', 'AWS S3', 'AWS CloudFront', 'GitHub Actions'],
-    link: '#',
-  },
-  {
-    id: 3,
-    title: '必殺チャタテムシ駆除捕獲人',
-    description: 'チャタテムシに関する情報をまとめた情報サイト。',
-    category: 'Webサイト',
-    techStack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
-    link: 'https://www.chatachata.jp/',
-  },
-];
-
-/* 最新3つのプロジェクトを取得 */
-const LATEST_PROJECTS = ALL_PROJECTS.slice(0, 3); // 最新3件
-
-/* スキル/学習サマリーデータ定義 */
-const LEARNING_SUMMARY = [
-  { title: 'フロントエンド', skills: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', '状態管理 (Zustandなど)'] },
-  { title: 'バックエンド/DB', skills: ['Node.js', 'Express.js', 'Next.js API Routes', 'Prisma', 'PostgreSQL'] },
-  { title: 'インフラ/DevOps (開発環境)', skills: ['AWS (S3, CloudFront, Amplify)', 'Docker', 'Docker Compose', 'Git/GitHub', 'WSL'] },
-];
 
 /* トップページ */
 const Home = () => {
-
   return (
     <div className="flex flex-col items-center min-h-screen bg-zinc-50 font-sans text-zinc-800 dark:bg-zinc-900 dark:text-zinc-200">
       <main className="w-full max-w-5xl p-4 sm:p-6 space-y-16 sm:space-y-20 pt-10 sm:pt-16">
@@ -69,11 +20,11 @@ const Home = () => {
             <ul className="space-y-3 sm:space-y-2 text-base sm:text-lg text-zinc-700 dark:text-zinc-300 mb-6 border-b border-zinc-200 dark:border-zinc-700 pb-4">
               <li className="flex flex-col sm:flex-row items-start sm:items-center">
                 <span className="text-indigo-500 mr-2 font-bold w-auto sm:w-20 sm:shrink-0">名前:</span>
-                千葉 翔太
+                {topPageData.name}
               </li>
               <li className="flex flex-col sm:flex-row items-start">
                 <span className="text-indigo-500 mr-2 font-bold w-auto sm:w-20 sm:shrink-0">経歴:</span>
-                短大卒業後、組み込みシステム開発5年。<br />現在も組み込み系エンジニアとして勤務しつつ、Web開発を独学中。
+                {topPageData.career}
               </li>
             </ul>
             <p className="text-lg sm:text-xl font-semibold text-indigo-600 dark:text-indigo-400 mb-4">
@@ -82,25 +33,25 @@ const Home = () => {
             <ul className="space-y-2 text-base sm:text-lg text-zinc-700 dark:text-zinc-300">
               <li className="flex items-start">
                 <span className="text-indigo-500 mr-2 text-xl">&bull;</span>
-                フロントエンド: Next.js, React, TypeScript, Tailwind CSS を用いたモダンなUI/UX設計と実装。
+                {topPageData.course_content.frontend}
               </li>
               <li className="flex items-start">
                 <span className="text-indigo-500 mr-2 text-xl">&bull;</span>
-                インフラ・デプロイ: AWS (S3, CloudFront) を中心としたサーバーレス構成でのデプロイ経験。
+                {topPageData.course_content.infra}
               </li>
               <li className="flex items-start">
                 <span className="text-indigo-500 mr-2 text-xl">&bull;</span>
-                開発環境: Docker と WSL を活用した、チーム開発にも対応可能なポータブルな環境構築。
+                {topPageData.course_content.devenv}
               </li>
               <li className="flex items-start">
                 <span className="text-indigo-500 mr-2 text-xl">&bull;</span>
-                目標: 開発環境の構築から、実際のアプリケーション設計、デプロイ、運用までの一連の工程を習得すること。
+                {topPageData.course_content.goal}
               </li>
             </ul>
           </div>
           <div className="mt-8">
             <Link
-              href="https://github.com/amatsu4510"
+              href={topPageData.gitUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-xl bg-indigo-600 px-5 py-3 text-base sm:text-lg font-semibold text-white transition-transform hover:scale-[1.02] shadow-lg"
