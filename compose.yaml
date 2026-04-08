@@ -5,8 +5,8 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        NEXT_PUBLIC_BLOG_CLD_FLONT_BASE_URL: ${NEXT_PUBLIC_BLOG_CLD_FLONT_BASE_URL}
-        NEXT_PUBLIC_BLOG_CLD_FLONT_IMAGE_URL: ${NEXT_PUBLIC_BLOG_CLD_FLONT_IMAGE_URL}
+        NEXT_PUBLIC_BLOG_URL: ${NEXT_PUBLIC_BLOG_URL}
+        NEXT_PUBLIC_BLOG_IMAGE_URL: ${NEXT_PUBLIC_BLOG_IMAGE_URL}
     # 開発環境のホスト側(ローカル)のファイル変更をコンテナに即座に反映
     volumes:
       - .:/app              # カレントディレクトリ全体を /app に同期

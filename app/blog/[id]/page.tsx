@@ -38,7 +38,7 @@ export const generateMetadata = async ({ params }: { params: Promise<{ id: strin
 const Post = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
   const postData = await getPostData(id);
-  const imageBaseUrl = process.env.NEXT_PUBLIC_BLOG_CLD_FLONT_IMAGE_URL || '';
+  const imageBaseUrl = process.env.NEXT_PUBLIC_BLOG_IMAGE_URL || '';
   const processedContent = postData.content!.replaceAll(
     '__BLOG_IMAGE__BASE__',
     imageBaseUrl

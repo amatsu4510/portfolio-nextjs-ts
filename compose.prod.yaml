@@ -5,8 +5,8 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        NEXT_PUBLIC_BLOG_CLD_FLONT_BASE_URL: ${NEXT_PUBLIC_BLOG_CLD_FLONT_BASE_URL}
-        NEXT_PUBLIC_BLOG_CLD_FLONT_IMAGE_URL: ${NEXT_PUBLIC_BLOG_CLD_FLONT_IMAGE_URL}
+        NEXT_PUBLIC_BLOG_URL: ${NEXT_PUBLIC_BLOG_URL}
+        NEXT_PUBLIC_BLOG_IMAGE_URL: ${NEXT_PUBLIC_BLOG_IMAGE_URL}
     env_file:
     - .env
     # Cloud Watchにログ飛ばす設定

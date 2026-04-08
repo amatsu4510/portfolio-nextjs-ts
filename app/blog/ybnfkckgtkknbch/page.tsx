@@ -7,7 +7,7 @@ import '../../../styles/MarkdownViewer.css'
 
 const BlogPreviewPage = () => {
   const [content, setContent] = useState('');
-  const imageBaseUrl = process.env.NEXT_PUBLIC_BLOG_CLD_FLONT_IMAGE_URL || '';
+  const imageBaseUrl = process.env.NEXT_PUBLIC_BLOG_IMAGE_URL || '';
 
   /* スクロール同期用のRef */
   const editorRef = useRef<HTMLTextAreaElement>(null);
