@@ -49,8 +49,11 @@ export const getSortedPostsData = async (): Promise<PostData[]> => {
     const response = await fetchWithRevalidate(POSTS_LIST_URL, 60);
     const allPostsData = await response.json() as PostData[];
 
+    /* published: false の記事を除外（未設定は表示扱い） */
+    const publishedPosts = allPostsData.filter(post => post.published !== false);
+
     /* 日付でソートします (新しい記事が上に来るように降順ソート) */
-    return allPostsData.sort((a, b) => {
+    return publishedPosts.sort((a, b) => {
       /* 日付を Date オブジェクトに変換して比較 */
       const dateA = new Date(a.date).getTime();
       const dateB = new Date(b.date).getTime();

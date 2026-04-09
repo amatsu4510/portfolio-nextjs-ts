@@ -1,4 +1,3 @@
-// src/proxy.ts
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
@@ -11,7 +10,6 @@ export function proxy(req: NextRequest) {
       const authValue = basicAuth.split(' ')[1];
       const [user, pwd] = atob(authValue).split(':');
 
-      // ユーザー名とパスワードを任意に設定（環境変数にするのがベストです）
       const ADMIN_USER = process.env.BASIC_AUTH_USER;
       const ADMIN_PASS = process.env.BASIC_AUTH_PASSWORD;
 

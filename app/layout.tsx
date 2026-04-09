@@ -49,12 +49,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        {/* 1. ナビゲーションバー (ヘッダー) */}
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}>
         <Header />
-        {/* メインコンテンツ */}
-        {children}
-        {/* フッター */}
+        <main className="flex-1">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

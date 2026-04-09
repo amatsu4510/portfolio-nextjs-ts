@@ -30,5 +30,6 @@ export type PostData = {
   update: string;
   title: string;
   description: string;
-  content?: string; // getSortedPostsDataでは含まれないためオプショナルに
+  content?: string;    // getSortedPostsDataでは含まれないためオプショナルに
+  published?: boolean; // false のとき一覧・ハイライトから非表示。未設定は true 扱い
 };
